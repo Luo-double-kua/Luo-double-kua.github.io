@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近学习了关于高阶累积量和差分功率谱的仿真。 高阶累积量高阶累积量是高阶统计量的一种，因为对于有的信噪比低的信号，运用传统的能量法进行检测是比较困难的，所以提出利用信号与噪声在某些统计上的不同进行分别，例如循环平稳特性、高斯平稳特性。高阶累积量就是利用信号和噪声的高斯统计特性不同来进行分别的，一般噪声的结果接近于0，而信号的结果与其能量的大小有关，视阶数的不同为E、E的二次方、E的三次方。高阶矩是">
+<meta name="description" content="最近学习了关于高阶累积量和差分功率谱的仿真。">
 <meta name="keywords" content="communication">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最近通信的学习总结">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/higher_order/index.html">
-<meta property="og:site_name" content="Sun&#39;s house">
-<meta property="og:description" content="最近学习了关于高阶累积量和差分功率谱的仿真。 高阶累积量高阶累积量是高阶统计量的一种，因为对于有的信噪比低的信号，运用传统的能量法进行检测是比较困难的，所以提出利用信号与噪声在某些统计上的不同进行分别，例如循环平稳特性、高斯平稳特性。高阶累积量就是利用信号和噪声的高斯统计特性不同来进行分别的，一般噪声的结果接近于0，而信号的结果与其能量的大小有关，视阶数的不同为E、E的二次方、E的三次方。高阶矩是">
+<meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="最近学习了关于高阶累积量和差分功率谱的仿真。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T08:05:23.212Z">
+<meta property="og:updated_time" content="2019-02-23T08:23:04.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最近通信的学习总结">
-<meta name="twitter:description" content="最近学习了关于高阶累积量和差分功率谱的仿真。 高阶累积量高阶累积量是高阶统计量的一种，因为对于有的信噪比低的信号，运用传统的能量法进行检测是比较困难的，所以提出利用信号与噪声在某些统计上的不同进行分别，例如循环平稳特性、高斯平稳特性。高阶累积量就是利用信号和噪声的高斯统计特性不同来进行分别的，一般噪声的结果接近于0，而信号的结果与其能量的大小有关，视阶数的不同为E、E的二次方、E的三次方。高阶矩是">
+<meta name="twitter:description" content="最近学习了关于高阶累积量和差分功率谱的仿真。">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>最近通信的学习总结 | Sun's house</title>
+  <title>最近通信的学习总结 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sun's house</span>
+        <span class="site-title">秉忠贞之诚,守退让之实</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -272,7 +272,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sun's house">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
     </span>
 
     
@@ -334,6 +334,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
 
           
 
@@ -353,6 +358,7 @@
 
       
         <p>最近学习了关于高阶累积量和差分功率谱的仿真。</p>
+<a id="more"></a>
 <h3 id="高阶累积量"><a href="#高阶累积量" class="headerlink" title="高阶累积量"></a>高阶累积量</h3><p>高阶累积量是高阶统计量的一种，因为对于有的信噪比低的信号，运用传统的能量法进行检测是比较困难的，所以提出利用信号与噪声在某些统计上的不同进行分别，例如循环平稳特性、高斯平稳特性。高阶累积量就是利用信号和噪声的高斯统计特性不同来进行分别的，一般噪声的结果接近于0，而信号的结果与其能量的大小有关，视阶数的不同为E、E的二次方、E的三次方。高阶矩是组成高阶累积量的一部分，每个高阶累积量的计算公式不同，高阶矩的是按公式cab=E{xa(n)xb*(n)},其中a、b分别为各自的次方。</p>
 <h3 id="差分功率谱"><a href="#差分功率谱" class="headerlink" title="差分功率谱"></a>差分功率谱</h3><p>一般来说噪声的功率谱幅度很低，这是噪声的特性所决定的，差分功率谱则是利用这一特性完成在某段时间内存在信号的中心频率与带宽的检测，将得出的功率谱进行预处理，减去底噪、放大一定倍数、进行平滑处理、前后相减、因为平滑处理之后近似一个矩形，所以再进行前后求差分就会在矩形的左边和右边分别出现峰值，这个两个峰值一大一小视为信号在功率上的左右边界，两者相减得到带宽、两者相加除二得到中心频率。</p>
 
@@ -589,6 +595,20 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客数
+    </span>
+  
+
+  
+</div>
+
 
 
 
@@ -757,5 +777,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

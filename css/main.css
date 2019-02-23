@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff32f0;
+  background: #ff50e0;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2355,13 +2355,6 @@ pre .javascript .function {
 .page-pv .busuanzi-value {
   margin: 0 5px;
 }
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
-}
 .page-archive .archive-page-counter {
   position: relative;
   top: 3px;
@@ -2799,7 +2792,7 @@ hr {
   }
 }
 .posts-expand .post-body img {
-  margin: 0;
+  margin: 0 auto;
 }
 .posts-expand .post-tags {
   text-align: left;
