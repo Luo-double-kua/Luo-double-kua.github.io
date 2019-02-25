@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最开始想的是对每个数num从1开始直到根号num做求取余运算，对每个结果为0的除数检测是否在primes中，若全部都在，则计数加一，直到最后计数为n就可以输出当时的num，不过超时了，这就比较尴尬啦，然后上网找的别人的代码。">
+<meta name="description" content="因为这三个题目比较简单，所以就一起放上来了。">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 313 超级丑数">
-<meta property="og:url" content="http://yoursite.com/2019/01/25/leetcode_313/index.html">
+<meta property="og:title" content="leetcode 977、984、989">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/leetcode 977、984、989/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="最开始想的是对每个数num从1开始直到根号num做求取余运算，对每个结果为0的除数检测是否在primes中，若全部都在，则计数加一，直到最后计数为n就可以输出当时的num，不过超时了，这就比较尴尬啦，然后上网找的别人的代码。">
+<meta property="og:description" content="因为这三个题目比较简单，所以就一起放上来了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-23T08:23:11.025Z">
+<meta property="og:updated_time" content="2019-02-25T12:22:35.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode 313 超级丑数">
-<meta name="twitter:description" content="最开始想的是对每个数num从1开始直到根号num做求取余运算，对每个结果为0的除数检测是否在primes中，若全部都在，则计数加一，直到最后计数为n就可以输出当时的num，不过超时了，这就比较尴尬啦，然后上网找的别人的代码。">
+<meta name="twitter:title" content="leetcode 977、984、989">
+<meta name="twitter:description" content="因为这三个题目比较简单，所以就一起放上来了。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/25/leetcode_313/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/25/leetcode 977、984、989/">
 
 
 
 
 
-  <title>leetcode 313 超级丑数 | 秉忠贞之诚,守退让之实</title>
+  <title>leetcode 977、984、989 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/leetcode_313/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/leetcode 977、984、989/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小霸王孙无月">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode 313 超级丑数</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode 977、984、989</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T10:39:03+08:00">
-                2019-01-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T20:22:35+08:00">
+                2019-02-25
               </time>
             
 
@@ -357,42 +357,182 @@
       
 
       
-        <p>最开始想的是对每个数num从1开始直到根号num做求取余运算，对每个结果为0的除数检测是否在primes中，若全部都在，则计数加一，直到最后计数为n就可以输出当时的num，不过超时了，这就比较尴尬啦，然后上网找的别人的代码。</p>
+        <p>因为这三个题目比较简单，所以就一起放上来了。</p>
 <a id="more"></a>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>编写一段程序来查找第 n 个超级丑数。</p>
-<p>超级丑数是指其所有质因数都是长度为 k 的质数列表 primes 中的正整数。</p>
-<p>示例:</p>
-<p>输入: n = 12, primes = [2,7,13,19]<br>输出: 32<br>解释: 给定长度为 4 的质数列表 primes = [2,7,13,19]，前 12 个超级丑数序列为：[1,2,4,7,8,13,14,16,19,26,28,32] 。<br>说明:</p>
-<p>1 是任何给定 primes 的超级丑数。<br>给定 primes 中的数字以升序排列。<br>0 &lt; k ≤ 100, 0 &lt; n ≤ 106, 0 &lt; primes[i] &lt; 1000 。<br>第 n 个超级丑数确保在 32 位有符整数范围内。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>下一个丑数建立在当前的丑数分别乘以素数表的素数所得到的最小值来构成，因此通过代码模拟这一过程即可。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>class Solution {
-public:
-int nthSuperUglyNumber(int n, vector&lt;int&gt;&amp; primes) {
-     if (n == 1)
-        return 1;
-    int l = primes.size();
-    vector&lt;int&gt; ugly(n,INT_MAX);//用于记录输出结果
-    vector&lt;int&gt; tmp(l,1);//用于记录primes得出的结果
-    vector&lt;int&gt; count(l,0);//输出丑数
-    int next = 1;//第一个丑数为1
-    for (int i = 0; i &lt; n; i++) {
-        ugly[i] = next;
-        next = INT_MAX;
-        for (int j = 0; j &lt; l; j++) {
-            if (tmp[j] == ugly[i])//因为是升序所以可以是== {
-                tmp[j] = ugly[count[j]]*primes[j];
-                count[j]++;
-            }
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ol start="977">
+<li>有序数组的平方</li>
+</ol>
+<p>给定一个按非递减顺序排序的整数数组 A，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。<br>示例:</p>
+<p>输入：[-4,-1,0,3,10]<br>输出：[0,1,9,16,100]</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这个挺简单的，就是从头开始求平方，然后插入进专门保存结果的vector里面。耗时之长，令人发指，看了别人排在前面的用时短的代码，</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>耗时最短。
+class Solution {
+static const int _ = []() {
+ios::sync_with_stdio(false);
+cin.tie(nullptr);
+cout.tie(nullptr);
+return 0;
+}();
+</code></pre><p>class Solution {<br>public:<br>    vector<int> sortedSquares(vector<int>&amp; A) {<br>        int size = A.size();</int></int></p>
+<pre><code>    if(size==1)
+        return {A[0]*A[0]};
 
-        }
-    next = min(next,*min_element(tmp.begin(),tmp.end()));
+    vector&lt;int&gt; res(size,0);
+
+
+    int pos = 0;
+
+    while(A[pos]&lt;0)
+    {
+        A[pos] = -A[pos];
+        ++pos;    
     }
-    return ugly[n-1];
+    int posForward = pos;
+    int posBackward = pos-1;
+    pos = 0;
+    while(posForward&lt;size &amp;&amp; posBackward&gt;=0)
+    {
+        if(A[posForward] &gt; A[posBackward])
+        {
+            res[pos++] = A[posBackward]*A[posBackward];
+            --posBackward;
+        }
+        else
+        {
+            res[pos++] = A[posForward]*A[posForward];
+            ++posForward;                
+        }
+
+    }
+    while(posForward&lt;size)
+    {
+        res[pos++] = A[posForward]*A[posForward];
+        ++posForward;     
+    }
+    while(posBackward&gt;=0)
+    {
+        res[pos++] = A[posBackward]*A[posBackward];
+        --posBackward;     
+    }
+
+
+
+    return res;
+
+
 }
 };
-next = min(next,*min_element(tmp.begin(),tmp.end()));
-max_element()前面不加*返回的是相应的位置，加上返回值，vector用的是tmp.begin(),tmp.end()形式，数组可以使用tmp，tmp+l形式，l为数组长度。
-</code></pre>
+我的
+class Solution {
+public:
+vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; A) {
+    vector&lt;int&gt; res;
+    res.push_back(A[0]*A[0]);
+    int number=0;
+    int flag=0;
+
+    for(int i=1;i&lt;A.size();i++)
+    {
+        flag=0;
+        number=A[i]*A[i];
+
+        for (int j=0;j&lt;res.size();j++)
+        {
+
+            if (number&lt;=res[j])
+            {
+                res.insert(res.begin()+j, number);
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+            res.push_back(number);
+    }
+
+    return res;
+
+}
+};
+</code></pre><h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h3><ol start="984">
+<li>不含 AAA 或 BBB 的字符串</li>
+</ol>
+<p>给定两个整数 A 和 B，返回任意字符串 S，要求满足：<br>S 的长度为 A + B，且正好包含 A 个 ‘a’ 字母与 B 个 ‘b’ 字母；<br>子串 ‘aaa’ 没有出现在 S 中；<br>子串 ‘bbb’ 没有出现在 S 中。<br>示例 1：<br>输入：A = 1, B = 2<br>输出：”abb”<br>解释：”abb”, “bab” 和 “bba” 都是正确答案。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>感觉挺简单的，一看就懂了。</p>
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><pre><code>class Solution(object):
+def strWithout3a3b(self, A, B):
+    &quot;&quot;&quot;
+    :type A: int
+    :type B: int
+    :rtype: str
+    &quot;&quot;&quot;
+    if A&lt;3 and B&lt;3:
+        return A*&apos;a&apos;+B*&apos;b&apos;
+    s=min(A,B)
+    l=max(A,B)
+    i=0
+    res=&apos;&apos;
+    re=l-s-1
+    sum1=A+B
+    while(i&lt;re):
+        if (A&gt;B):
+            if(A&gt;=2):
+                res=res+&apos;aa&apos;
+                A-=2
+            if(B&gt;=1):
+                res=res+&apos;b&apos;
+                B-=1
+            i=i+1
+            continue
+
+        if(B&gt;A):
+            if(B&gt;=2):
+                res=res+&apos;bb&apos;
+                B-=2
+            if(A&gt;=1):
+                res=res+&apos;a&apos;
+                A-=1
+        i=i+1
+    if(len(res)==(sum1)):
+        return res
+    while (A&gt;0 and B&gt;0):
+        res=res+&apos;ab&apos;
+        A=A-1
+        B=B-1
+    if (A&gt;0 ):
+        res=res+A*&apos;a&apos;
+
+
+    if (B&gt;0):
+        res=res+B*&apos;b&apos;
+
+
+    return res
+</code></pre><h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a>题目</h3><ol start="989">
+<li>数组形式的整数加法<br>对于非负整数 X 而言，X 的数组形式是每位数字按从左到右的顺序形成的数组。例如，如果 X = 1231，那么其数组形式为 [1,2,3,1]。<br>给定非负整数 X 的数组形式 A，返回整数 X+K 的数组形式。<br>示例 1：<br>输入：A = [1,2,0,0], K = 34<br>输出：[1,2,3,4]<br>解释：1200 + 34 = 1234<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3>先翻转整个vector，然后进行加法，在结束后再对k的值检查，直到为零，最后再次反转。</li>
+</ol>
+<h3 id="code-2"><a href="#code-2" class="headerlink" title="code"></a>code</h3><pre><code>class Solution {
+public:
+vector&lt;int&gt; addToArrayForm(vector&lt;int&gt;&amp; A, int K) {
+    int m=A.size();
+    reverse(A.begin(),A.end());
+    for(int i=0;i&lt;m;i++)
+    {
+        K+=A[i];
+        A[i]=K%10;
+        K/=10;
+    }
+    while(K)
+    {
+        A.push_back(K%10);
+        K/=10;
+    }
+    reverse(A.begin(),A.end());
+    return A;
+
+}
+</code></pre><p>};</p>
+
       
     </div>
     
@@ -422,8 +562,8 @@ max_element()前面不加*返回的是相应的位置，加上返回值，vector
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/一些细枝末节/" rel="next" title="最近学习的一些很细节的东西">
-                <i class="fa fa-chevron-left"></i> 最近学习的一些很细节的东西
+              <a href="/2019/01/25/leetcode_313/" rel="next" title="leetcode 313 超级丑数">
+                <i class="fa fa-chevron-left"></i> leetcode 313 超级丑数
               </a>
             
           </div>
@@ -431,10 +571,6 @@ max_element()前面不加*返回的是相应的位置，加上返回值，vector
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/25/leetcode 977、984、989/" rel="prev" title="leetcode 977、984、989">
-                leetcode 977、984、989 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,7 +718,7 @@ max_element()前面不加*返回的是相应的位置，加上返回值，vector
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-1"><span class="nav-number">4.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">6.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-2"><span class="nav-number">7.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-2"><span class="nav-number">8.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-2"><span class="nav-number">9.</span> <span class="nav-text">code</span></a></li></ol></div>
             
 
           </div>
