@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="c++,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="记录生活中的点点滴滴~~~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于——">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+<meta name="description" content="最近学习的一些很细节的东西。">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++关于&amp;和*的区别">
+<meta property="og:url" content="http://yoursite.com/2019/03/29/c++关于&和指针的区别/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="记录生活中的点点滴滴~~~">
+<meta property="og:description" content="最近学习的一些很细节的东西。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-20T06:56:40.328Z">
+<meta property="og:updated_time" content="2019-03-29T02:40:10.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于——">
-<meta name="twitter:description" content="记录生活中的点点滴滴~~~">
+<meta name="twitter:title" content="c++关于&amp;和*的区别">
+<meta name="twitter:description" content="最近学习的一些很细节的东西。">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/about/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/29/c++关于&和指针的区别/">
 
 
 
 
 
-  <title>关于—— | 秉忠贞之诚,守退让之实</title>
+  <title>c++关于&和*的区别 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -250,34 +251,183 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/c++关于&和指针的区别/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于——</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>记录生活中的点点滴滴~~~</p>
-
+          <h1 class="post-title" itemprop="name headline">c++关于&和*的区别</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-29T10:40:10+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>最近学习的一些很细节的东西。</p>
+<a id="more"></a>
+<pre><code>*是取值运算符，对地址使用可以获得地址中储存的数值。 对于指针a，*a表示取a中的值
+&amp;是地址运算符，对变量使用可以获得该变量的地址。     对于变量b，&amp;b表示取b的地址
+
+在定义时，* 是一个标识符，声明该变量是一个指针，比如说int *p; 那p就是一个指向int型的指针；
+在调用时，*p是指针p指向的那个变量，比如说之前有int a=5；int *p=a；那么p的值是a的地址，也就是指针p指向a，*p则等于a的值，即*p=5。
+而&amp;，则是引用，比如说有定义int a=5；再定义int b=&amp;a；那么这里的b则引用a的值，即b=5，而再给b赋值：b=10，a的值也会变为10。
+*和&amp;的区别：
+先定义有int x = 0；int *p = x；
+1、若定义函数： void fun_1（int a）{ a=5；} ， 则调用：fun_1(x); 之后，x还等于0；因为fun_1函数只改变了形参a的值，a只是fun_1函数里的局部变量，调用fun_1(x)相当于是“a=x;a=5;”，x没变；
+2、若定义函数：void fun_2（int &amp;a）{ a=5；} ， 则调用：fun_2(x); 之后，x等于5；因为这里的a引用了x的值；
+3、若定义函数：void fun_3（int *a）{ *a=5；} ， 则调用：fun_3(p); 之后，x也等于5；因为fun_3函数的参数a是一个指针，相当于a=p；*a则与*p指向同一地址，改变*a即改变*p即x
+</code></pre>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/25/leetcode 977、984、989/" rel="next" title="leetcode 977、984、989">
+                <i class="fa fa-chevron-left"></i> leetcode 977、984、989
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
