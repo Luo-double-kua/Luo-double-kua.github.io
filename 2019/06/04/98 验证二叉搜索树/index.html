@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="c++,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode 98 验证二叉搜索树">
+<meta property="og:url" content="http://yoursite.com/2019/06/04/98 验证二叉搜索树/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-20T06:46:17.706Z">
+<meta property="og:updated_time" content="2019-06-04T03:26:05.849Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="leetcode 98 验证二叉搜索树">
+<meta name="twitter:description" content="提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/04/98 验证二叉搜索树/">
 
 
 
 
 
-  <title>tags | 秉忠贞之诚,守退让之实</title>
+  <title>leetcode 98 验证二叉搜索树 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -247,40 +251,207 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/04/98 验证二叉搜索树/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Another-Tag/" style="font-size: 12px; color: #ccc">Another Tag</a> <a href="/tags/Testing/" style="font-size: 12px; color: #ccc">Testing</a> <a href="/tags/c/" style="font-size: 30px; color: #111">c++</a> <a href="/tags/communication/" style="font-size: 12px; color: #ccc">communication</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">leetcode 98 验证二叉搜索树</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-04T11:22:54+08:00">
+                2019-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。</p>
+<a id="more"></a>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。</p>
+<p>假设一个二叉搜索树具有如下特征：</p>
+<p>节点的左子树只包含小于当前节点的数。<br>节点的右子树只包含大于当前节点的数。<br>所有左子树和右子树自身必须也是二叉搜索树。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>按照二叉搜索树的定义，分别将它的左子树和右子树是否为二叉搜索树进行分别判断，例如zuo判断，如果节点没有左子树，则返回true，若节点有左子树，那节点要比所有的左子树的值大，需要一个栈将所有的左子树的值存入进行比较，然后再对节点的左节点进行左右子树是否为二叉搜索树判断，you判断同理，这里面会有大量的比较。没有利用上比如a大于b，b大于c，那a肯定大于c，而是做了两次比较a是否大于c，b是否大于c，存在冗余计算。</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><p>解法一（40ms，最开始自己写的）<br>    bool iszuo(TreeNode<em> root)<br>    {<br>        if(!root-&gt;left)<br>            return true;<br>        stack&lt;TreeNode</em>&gt; node;<br>        node.push(root-&gt;left);<br>        while(!node.empty())<br>        {<br>            TreeNode* p1=node.top();<br>            node.pop();<br>            if (p1-&gt;val&gt;=root-&gt;val)<br>                return false;<br>            if(p1-&gt;left)<br>                node.push(p1-&gt;left);<br>            if(p1-&gt;right)<br>                node.push(p1-&gt;right);<br>        }</p>
+<pre><code>    return iszuo(root-&gt;left)&amp;&amp;isyou(root-&gt;left);
+}
+bool isyou(TreeNode* root)
+{
+    if(!root-&gt;right)
+        return true;
+    stack&lt;TreeNode*&gt; node;
+    node.push(root-&gt;right);
+    while(!node.empty())
+    {
+        TreeNode* p1=node.top();
+        node.pop();
+        if (p1-&gt;val&lt;=root-&gt;val)
+            return false;
+        if(p1-&gt;left)
+            node.push(p1-&gt;left);
+        if(p1-&gt;right)
+            node.push(p1-&gt;right);
+    }
+
+    return iszuo(root-&gt;right)&amp;&amp;isyou(root-&gt;right);
+}
+bool isValidBST(TreeNode* root) {
+    if (root==NULL)
+        return true;
+    return iszuo(root)&amp;&amp;isyou(root);
+}
+</code></pre><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>我们利用前序遍历对二叉树进行一次遍历，根据前序遍历的定义，首先遍历树的左子树，在遍历中间根节点，在遍历右子树，这样就相当于将二叉树从最左端的叶子开始慢慢遍历，一个根节点，只有在它的左边的节点全部进入遍历数组之后它才会进入遍历数组，它的右子树只有在它进入遍历数组之后才会进入遍历数组，所以我们将其实现前序遍历之后，只要比较数组是否是有序的就可以了。相比上一个对每一个子树进行检查，速度快了一倍。</p>
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><p>解法二（利用前序遍历实现一个数组，16ms）<br>    void qianxuf(vector<int> &amp;qianxu,TreeNode<em> root)//要记得用&amp;还是</em><br>    {<br>        if(root-&gt;left)<br>            qianxuf(qianxu,root-&gt;left);<br>        qianxu.push_back(root-&gt;val);<br>        if(root-&gt;right)<br>            qianxuf(qianxu,root-&gt;right);<br>        return ;<br>    }<br>    bool isValidBST(TreeNode* root) {<br>        if(root==NULL)<br>            return true;<br>        vector<int> qianxu;<br>        qianxuf(qianxu,root);<br>        for(int i=0;i&lt;qianxu.size()-1;i++)<br>        {<br>            if(qianxu[i]&gt;=qianxu[i+1])<br>                return false;<br>        }<br>        return true;</int></int></p>
+<pre><code>}
+</code></pre>
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/04/5月27这周的学习总结/" rel="next" title="上周的学习总结">
+                <i class="fa fa-chevron-left"></i> 上周的学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -289,6 +460,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -309,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -386,6 +570,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">5.</span> <span class="nav-text">code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
