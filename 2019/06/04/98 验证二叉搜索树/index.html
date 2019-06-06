@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
 <meta property="og:description" content="提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-04T03:26:05.849Z">
+<meta property="og:updated_time" content="2019-06-06T02:44:58.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode 98 验证二叉搜索树">
 <meta name="twitter:description" content="提供了leetcode 98题的两种解法，一种耗时40ms，一种耗时16ms。">
@@ -363,8 +363,26 @@
 <p>假设一个二叉搜索树具有如下特征：</p>
 <p>节点的左子树只包含小于当前节点的数。<br>节点的右子树只包含大于当前节点的数。<br>所有左子树和右子树自身必须也是二叉搜索树。</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>按照二叉搜索树的定义，分别将它的左子树和右子树是否为二叉搜索树进行分别判断，例如zuo判断，如果节点没有左子树，则返回true，若节点有左子树，那节点要比所有的左子树的值大，需要一个栈将所有的左子树的值存入进行比较，然后再对节点的左节点进行左右子树是否为二叉搜索树判断，you判断同理，这里面会有大量的比较。没有利用上比如a大于b，b大于c，那a肯定大于c，而是做了两次比较a是否大于c，b是否大于c，存在冗余计算。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><p>解法一（40ms，最开始自己写的）<br>    bool iszuo(TreeNode<em> root)<br>    {<br>        if(!root-&gt;left)<br>            return true;<br>        stack&lt;TreeNode</em>&gt; node;<br>        node.push(root-&gt;left);<br>        while(!node.empty())<br>        {<br>            TreeNode* p1=node.top();<br>            node.pop();<br>            if (p1-&gt;val&gt;=root-&gt;val)<br>                return false;<br>            if(p1-&gt;left)<br>                node.push(p1-&gt;left);<br>            if(p1-&gt;right)<br>                node.push(p1-&gt;right);<br>        }</p>
-<pre><code>    return iszuo(root-&gt;left)&amp;&amp;isyou(root-&gt;left);
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>解法一（40ms，最开始自己写的）
+bool iszuo(TreeNode* root)
+{
+    if(!root-&gt;left)
+        return true;
+    stack&lt;TreeNode*&gt; node;
+    node.push(root-&gt;left);
+    while(!node.empty())
+    {
+        TreeNode* p1=node.top();
+        node.pop();
+        if (p1-&gt;val&gt;=root-&gt;val)
+            return false;
+        if(p1-&gt;left)
+            node.push(p1-&gt;left);
+        if(p1-&gt;right)
+            node.push(p1-&gt;right);
+    }
+
+    return iszuo(root-&gt;left)&amp;&amp;isyou(root-&gt;left);
 }
 bool isyou(TreeNode* root)
 {
@@ -392,8 +410,28 @@ bool isValidBST(TreeNode* root) {
     return iszuo(root)&amp;&amp;isyou(root);
 }
 </code></pre><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>我们利用前序遍历对二叉树进行一次遍历，根据前序遍历的定义，首先遍历树的左子树，在遍历中间根节点，在遍历右子树，这样就相当于将二叉树从最左端的叶子开始慢慢遍历，一个根节点，只有在它的左边的节点全部进入遍历数组之后它才会进入遍历数组，它的右子树只有在它进入遍历数组之后才会进入遍历数组，所以我们将其实现前序遍历之后，只要比较数组是否是有序的就可以了。相比上一个对每一个子树进行检查，速度快了一倍。</p>
-<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><p>解法二（利用前序遍历实现一个数组，16ms）<br>    void qianxuf(vector<int> &amp;qianxu,TreeNode<em> root)//要记得用&amp;还是</em><br>    {<br>        if(root-&gt;left)<br>            qianxuf(qianxu,root-&gt;left);<br>        qianxu.push_back(root-&gt;val);<br>        if(root-&gt;right)<br>            qianxuf(qianxu,root-&gt;right);<br>        return ;<br>    }<br>    bool isValidBST(TreeNode* root) {<br>        if(root==NULL)<br>            return true;<br>        vector<int> qianxu;<br>        qianxuf(qianxu,root);<br>        for(int i=0;i&lt;qianxu.size()-1;i++)<br>        {<br>            if(qianxu[i]&gt;=qianxu[i+1])<br>                return false;<br>        }<br>        return true;</int></int></p>
-<pre><code>}
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><pre><code>解法二（利用前序遍历实现一个数组，16ms）
+void qianxuf(vector&lt;int&gt; &amp;qianxu,TreeNode* root)//要记得用&amp;还是*
+   {
+    if(root-&gt;left)
+        qianxuf(qianxu,root-&gt;left);
+    qianxu.push_back(root-&gt;val);
+    if(root-&gt;right)
+        qianxuf(qianxu,root-&gt;right);
+    return ;
+    }
+bool isValidBST(TreeNode* root) {
+    if(root==NULL)
+        return true;
+    vector&lt;int&gt; qianxu;
+    qianxuf(qianxu,root);
+    for(int i=0;i&lt;qianxu.size()-1;i++)
+    {
+        if(qianxu[i]&gt;=qianxu[i+1])
+            return false;
+    }
+    return true;
+   }
 </code></pre>
       
     </div>
