@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近学习的一些很细节的东西。">
+<meta name="description" content="本来是用一个新数组存储数值，然后重新赋给链表，后来觉得可以试试直接用两个链表组合。">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最近学习的一些很细节的东西">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/一些细枝末节/index.html">
+<meta property="og:title" content="leetcode 86 分隔链表">
+<meta property="og:url" content="http://yoursite.com/2019/06/18/leetcode_86_分隔链表/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="最近学习的一些很细节的东西。">
+<meta property="og:description" content="本来是用一个新数组存储数值，然后重新赋给链表，后来觉得可以试试直接用两个链表组合。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-23T08:22:18.798Z">
+<meta property="og:updated_time" content="2019-06-18T13:11:12.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="最近学习的一些很细节的东西">
-<meta name="twitter:description" content="最近学习的一些很细节的东西。">
+<meta name="twitter:title" content="leetcode 86 分隔链表">
+<meta name="twitter:description" content="本来是用一个新数组存储数值，然后重新赋给链表，后来觉得可以试试直接用两个链表组合。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/24/一些细枝末节/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/18/leetcode_86_分隔链表/">
 
 
 
 
 
-  <title>最近学习的一些很细节的东西 | 秉忠贞之诚,守退让之实</title>
+  <title>leetcode 86 分隔链表 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/一些细枝末节/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/18/leetcode_86_分隔链表/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小霸王孙无月">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">最近学习的一些很细节的东西</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode 86 分隔链表</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-24T20:36:40+08:00">
-                2019-01-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-18T21:00:41+08:00">
+                2019-06-18
               </time>
             
 
@@ -357,26 +357,64 @@
       
 
       
-        <p>最近学习的一些很细节的东西。</p>
-<a id="more"></a>
-<pre><code>int b[]={1,2,3,4};
-cout&lt;&lt;b;//仅仅打印数组的起始地址，只有字符串数组才能这样输出。
+        <p>本来是用一个新数组存储数值，然后重新赋给链表，后来觉得可以试试直接用两个链表组合。<br><a id="more"></a></p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。</p>
+<p>你应当保留两个分区中每个节点的初始相对位置。</p>
+<p>示例:</p>
+<p>输入: head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>输出: 1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这个就是新建了两个节点，然后遍历链表，如果链表节点的值大于X，则我们将此节点放在before链表中，否则放在after链表中，最后再将两个链表结合起来，这个方法要特别注意两个链表最后的连接，容易出问题，有一点绕。</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>ListNode* partition(ListNode* head, int x) {
+    ListNode* pre=new ListNode(-1);
+    pre-&gt;next=head;
+    ListNode* before=new ListNode(-1);
+    ListNode* after=new ListNode(-1);
+    ListNode* before_head=before;
+    ListNode* after_head=after;
+    while(head!=NULL){
+        if(head-&gt;val&lt;x){
+            before-&gt;next=head;
+            before=before-&gt;next;
+        }
+        else{
+            after-&gt;next=head;
+            after=after-&gt;next;
+        }
+        head=head-&gt;next;
+    }
+    after-&gt;next=NULL;//需要先设置下一个指向NULL
+    before-&gt;next=after_head-&gt;next;//注意是next等于，不然会被覆盖。
+    return  before_head-&gt;next;
+}
+</code></pre><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>这个就是建立了两个vector，相当简单，遍历链表，节点的值就是大于x的存到一个vector中，小于x的存在一个vector中，最后我们再遍历链表，先将小于x的vector中的值赋给链表，再将大于x的vector的值赋给链表。</p>
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><pre><code>ListNode* partition(ListNode* head, int x) {
+    ListNode* p1=head;
+    vector&lt;int&gt;nums1;
+    vector&lt;int&gt;nums2;
+    while(p1)
+    {
 
-int jindu(){
-float a=3.1311111111111111111111111111111111111111111111111111111111111;
-double b=3.1311111111111111111111111111111111111111111111111111111111111;
-long double c=3.1311111111111111111111111111111111111111111111111111111111111;
-cout&lt;&lt;setprecision(50)&lt;&lt;a&lt;&lt;endl;//cout默认输出6位精度，用s那个函数自定义精度，但是输出结果中，float只有前面7位正确，double只有15位正确。
-cout&lt;&lt;b&lt;&lt;endl;
-cout&lt;&lt;c&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(shortint)=&quot;&lt;&lt;sizeof(short int)&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(int)=&quot;&lt;&lt;sizeof(int)&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(longint)=&quot;&lt;&lt;sizeof(long int)&lt;&lt;endl;
-//int a=-123;
-//cout&lt;&lt;hex&lt;&lt;a&lt;&lt;endl;
-//cout&lt;&lt;a&lt;&lt;endl;//不会改变回来,依然是十六进制。
-return 0;
-return 0;
+        if(p1-&gt;val&gt;=x)
+            nums2.push_back(p1-&gt;val);
+        else
+            nums1.push_back(p1-&gt;val);
+
+        p1=p1-&gt;next;
+    }
+    p1=head;
+    int i=0;
+    while(p1&amp;&amp;i&lt;nums1.size())
+    {
+        p1-&gt;val=nums1[i++];
+        p1=p1-&gt;next;
+    }
+    i=0;
+    while(p1)
+    {
+        p1-&gt;val=nums2[i++];
+        p1=p1-&gt;next;
+    }
+    return head;
+
 }
 </code></pre>
       
@@ -408,8 +446,8 @@ return 0;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/leetcode_650/" rel="next" title="leetcode 650 只有两个键的键盘">
-                <i class="fa fa-chevron-left"></i> leetcode 650 只有两个键的键盘
+              <a href="/2019/06/13/leetcode_80_删除排序数组中的重复项 II/" rel="next" title="leetcode 80 删除排序数组中的重复项 II">
+                <i class="fa fa-chevron-left"></i> leetcode 80 删除排序数组中的重复项 II
               </a>
             
           </div>
@@ -418,8 +456,8 @@ return 0;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/25/leetcode_313/" rel="prev" title="leetcode 313 超级丑数">
-                leetcode 313 超级丑数 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/18/leetcode_1041_困于环中的机器人/" rel="prev" title="leetcode 1041 困于环中的机器人">
+                leetcode 1041 困于环中的机器人 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -472,8 +510,17 @@ return 0;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +596,22 @@ return 0;
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">5.</span> <span class="nav-text">code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
