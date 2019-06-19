@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。 二叉搜索树保证具有唯一的值。 思路充分利用二叉搜索树的性质，分三种情况考虑，第一种情况，如果某节点的值在左右值之间，那么首先加上此节点，其次我们应该无法确定左右子树的值是否会包含在这个范围内，所以再对左右子树的值进行判断。第二种情况，节点的值大于右边界，所以右子树肯定不会含有此范围的值，我们直接进入左子树寻找，">
+<meta name="description" content="——————分隔符——————">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode 938 二叉搜索树的范围和">
 <meta property="og:url" content="http://yoursite.com/2019/06/19/leetcode_938_二叉搜索树的范围和/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="题目给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。 二叉搜索树保证具有唯一的值。 思路充分利用二叉搜索树的性质，分三种情况考虑，第一种情况，如果某节点的值在左右值之间，那么首先加上此节点，其次我们应该无法确定左右子树的值是否会包含在这个范围内，所以再对左右子树的值进行判断。第二种情况，节点的值大于右边界，所以右子树肯定不会含有此范围的值，我们直接进入左子树寻找，">
+<meta property="og:description" content="——————分隔符——————">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-19T02:07:33.167Z">
+<meta property="og:updated_time" content="2019-06-19T02:49:00.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode 938 二叉搜索树的范围和">
-<meta name="twitter:description" content="题目给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。 二叉搜索树保证具有唯一的值。 思路充分利用二叉搜索树的性质，分三种情况考虑，第一种情况，如果某节点的值在左右值之间，那么首先加上此节点，其次我们应该无法确定左右子树的值是否会包含在这个范围内，所以再对左右子树的值进行判断。第二种情况，节点的值大于右边界，所以右子树肯定不会含有此范围的值，我们直接进入左子树寻找，">
+<meta name="twitter:description" content="——————分隔符——————">
 
 
 
@@ -357,7 +357,7 @@
       
 
       
-        <a id="more"></a>
+        <p>——————分隔符——————<br><a id="more"></a></p>
 <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。</p>
 <p>二叉搜索树保证具有唯一的值。</p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>充分利用二叉搜索树的性质，分三种情况考虑，第一种情况，如果某节点的值在左右值之间，那么首先加上此节点，其次我们应该无法确定左右子树的值是否会包含在这个范围内，所以再对左右子树的值进行判断。第二种情况，节点的值大于右边界，所以右子树肯定不会含有此范围的值，我们直接进入左子树寻找，第三种情况，节点小于左边界，同理，直接进入右子树寻找。</p>

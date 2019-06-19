@@ -643,27 +643,17 @@
 
       
         
-          
-            <a id="more"></a>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定二叉搜索树的根结点 root，返回 L 和 R（含）之间的所有结点的值的和。</p>
-<p>二叉搜索树保证具有唯一的值。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>充分利用二叉搜索树的性质，分三种情况考虑，第一种情况，如果某节点的值在左右值之间，那么首先加上此节点，其次我们应该无法确定左右子树的值是否会包含在这个范围内，所以再对左右子树的值进行判断。第二种情况，节点的值大于右边界，所以右子树肯定不会含有此范围的值，我们直接进入左子树寻找，第三种情况，节点小于左边界，同理，直接进入右子树寻找。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>int rangeSumBST(TreeNode* root, int L, int R) {
-   if(root == NULL){
-       return 0;
-   }
-   if(root-&gt;val &gt; R){
-       return rangeSumBST(root-&gt;left, L, R);
-   } else if(root-&gt;val &lt; L){
-       return rangeSumBST(root-&gt;right, L, R);
-   } else {
-       return root-&gt;val + rangeSumBST(root-&gt;left, L, R) + rangeSumBST(root-&gt;right, L, R);
-   }
-</code></pre>
-          
+          <p>——————分隔符——————<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/19/leetcode_938_二叉搜索树的范围和/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -945,30 +935,17 @@
 
       
         
-          
-            <a id="more"></a>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>有一堆石头，每块石头的重量都是正整数。</p>
-<p>每一回合，从中选出两块最重的石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</p>
-<p>如果 x == y，那么两块石头都会被完全粉碎；<br>如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。<br>最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回 0。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>直接排好序，然后从最后开始粉碎，如果剩下的石头数目大于1，就接着粉碎，若两者重量相等，直接进行下一次粉碎判定，若不等，按顺序插入差值，最后判断数组是否为空，为空输出0，不为空输出唯一的那个元素。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code> int lastStoneWeight(vector&lt;int&gt;&amp; stones) {
-    sort(stones.begin(), stones.end());
-    int len, buf;
-    while((len = stones.size()) &gt; 1)
-    {
-        buf = stones[len - 1] - stones[len - 2];
-        stones.erase(stones.end() - 2, stones.end());
-        if(buf != 0)
-            stones.insert(upper_bound(stones.begin(), stones.end(), buf), buf);
-    }
-
-    return stones.empty()? 0 : stones.at(0);
-}
-</code></pre>
-          
+          <p>————————分隔符——————<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/19/leetcode_1046_最后一块石头的重量/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
@@ -1688,24 +1665,17 @@
 
       
         
-          
-            <a id="more"></a>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>我们把符合下列属性的数组 A 称作山脉：</p>
-<p>A.length &gt;= 3<br>存在 0 &lt; i &lt; A.length - 1 使得A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]<br>给定一个确定为山脉的数组，返回任何满足 A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1] 的 i 的值。</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>按照题目意思判断就行了。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code> int peakIndexInMountainArray(vector&lt;int&gt;&amp; A) {
-    for(int i=1;i&lt;A.size()-1;i++)
-    {
-        if(A[i]&gt;A[i+1]&amp;&amp;A[i]&gt;A[i-1])
-            return i;
-    }
-    return -1;
-}
-</code></pre>
-          
+          <p>分封线————————<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/06/19/leetcode_852_山脉数组的峰顶索引/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
     
     
     
