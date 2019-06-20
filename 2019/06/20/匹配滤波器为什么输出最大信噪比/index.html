@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="c++,">
+  <meta name="keywords" content="通信,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="最近学习的一些很细节的东西。">
-<meta name="keywords" content="c++">
+<meta name="description" content="————————分隔符——————">
+<meta name="keywords" content="通信">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最近学习的一些很细节的东西">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/一些细枝末节/index.html">
+<meta property="og:title" content="匹配滤波器为什么输出最大信噪比">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="最近学习的一些很细节的东西。">
+<meta property="og:description" content="————————分隔符——————">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-23T08:22:18.798Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/2.png">
+<meta property="og:updated_time" content="2019-06-20T02:57:15.050Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="最近学习的一些很细节的东西">
-<meta name="twitter:description" content="最近学习的一些很细节的东西。">
+<meta name="twitter:title" content="匹配滤波器为什么输出最大信噪比">
+<meta name="twitter:description" content="————————分隔符——————">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/1.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/24/一些细枝末节/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/">
 
 
 
 
 
-  <title>最近学习的一些很细节的东西 | 秉忠贞之诚,守退让之实</title>
+  <title>匹配滤波器为什么输出最大信噪比 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/一些细枝末节/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/匹配滤波器为什么输出最大信噪比/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小霸王孙无月">
@@ -280,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">最近学习的一些很细节的东西</h1>
+          <h1 class="post-title" itemprop="name headline">匹配滤波器为什么输出最大信噪比</h1>
         
 
         <div class="post-meta">
@@ -292,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-24T20:36:40+08:00">
-                2019-01-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T10:50:10+08:00">
+                2019-06-20
               </time>
             
 
@@ -315,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c++</span>
+                  <a href="/categories/通信/" itemprop="url" rel="index">
+                    <span itemprop="name">通信</span>
                   </a>
                 </span>
 
@@ -357,28 +360,12 @@
       
 
       
-        <p>最近学习的一些很细节的东西。</p>
-<a id="more"></a>
-<pre><code>int b[]={1,2,3,4};
-cout&lt;&lt;b;//仅仅打印数组的起始地址，只有字符串数组才能这样输出。
+        <p>————————分隔符——————<br><a id="more"></a></p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>匹配滤波器是为了实现抽样判决器在抽样时刻得到最大信噪比，那如何实现这个最佳滤波器的传输函数呢？</p>
+<p>匹配滤波器的传输函数</p>
+<p>   假设滤波器的传输函数是H（ω）。它的输入端是噪声和信号之和 x（t）=s（t）+n（t）。其中n（t）是白噪声，它的功率密度谱为Pn（ω）=n/2。s（t）的频谱假设为S（ω），由于信号与噪声互不相关，滤波器是线性网络。根据叠加原理，可以对两者通过滤波器的情况分别讨论，它的输出肯定是两个部分的和y（t）=So（t）+No（t）。其中有用信号为1/2π乘上H（ω）S（ω）*exp（jωt）中ω在负无穷到正无穷的积分，而输出噪声的平均功率为：</p>
+<p><img src="1.png" alt=""><br>令to为某一抽样时刻，定义滤波器在to时刻输出的有用信号瞬时功率和噪声平均功率之比为：<br><img src="2.png" alt=""><br>根据施瓦茨不等式，若要让此等式的比值最大，令F1（ω）=H（ω），F2（ω）=S（ω）<em>exp（jωt），只有在F1（ω）=kF1</em>（ω）的情况下才成立，并且最大信噪比为2E/no。其中E为输入信号能量。所以当H（ω）=k<em>S（ω）</em>exp（jωt）时，可以输出最大信噪比，因为它只与输入信号有关，所以叫做匹配滤波器。</p>
 
-int jindu(){
-float a=3.1311111111111111111111111111111111111111111111111111111111111;
-double b=3.1311111111111111111111111111111111111111111111111111111111111;
-long double c=3.1311111111111111111111111111111111111111111111111111111111111;
-cout&lt;&lt;setprecision(50)&lt;&lt;a&lt;&lt;endl;//cout默认输出6位精度，用s那个函数自定义精度，但是输出结果中，float只有前面7位正确，double只有15位正确。
-cout&lt;&lt;b&lt;&lt;endl;
-cout&lt;&lt;c&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(shortint)=&quot;&lt;&lt;sizeof(short int)&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(int)=&quot;&lt;&lt;sizeof(int)&lt;&lt;endl;
-//cout&lt;&lt;&quot;sizeof(longint)=&quot;&lt;&lt;sizeof(long int)&lt;&lt;endl;
-//int a=-123;
-//cout&lt;&lt;hex&lt;&lt;a&lt;&lt;endl;
-//cout&lt;&lt;a&lt;&lt;endl;//不会改变回来,依然是十六进制。
-return 0;
-return 0;
-}
-</code></pre>
       
     </div>
     
@@ -395,7 +382,7 @@ return 0;
       
         <div class="post-tags">
           
-            <a href="/tags/c/" rel="tag"># c++</a>
+            <a href="/tags/通信/" rel="tag"># 通信</a>
           
         </div>
       
@@ -408,8 +395,8 @@ return 0;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/24/leetcode_650/" rel="next" title="leetcode 650 只有两个键的键盘">
-                <i class="fa fa-chevron-left"></i> leetcode 650 只有两个键的键盘
+              <a href="/2019/06/19/leetcode_704_二分查找/" rel="next" title="leetcode 704 二分查找">
+                <i class="fa fa-chevron-left"></i> leetcode 704 二分查找
               </a>
             
           </div>
@@ -417,10 +404,6 @@ return 0;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/25/leetcode_313/" rel="prev" title="leetcode 313 超级丑数">
-                leetcode 313 超级丑数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -472,8 +455,17 @@ return 0;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -549,6 +541,22 @@ return 0;
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
