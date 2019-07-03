@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="c++,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="秉忠贞之诚,守退让之实">
-<meta property="og:url" content="http://yoursite.com/categories/communication/index.html">
+<meta name="description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode 34 在排序数组中查找元素的第一个和最后一个位置">
+<meta property="og:url" content="http://yoursite.com/2019/06/26/leetcode_34/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-26T11:20:20.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="秉忠贞之诚,守退让之实">
+<meta name="twitter:title" content="leetcode 34 在排序数组中查找元素的第一个和最后一个位置">
+<meta name="twitter:description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/communication/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/26/leetcode_34/">
 
 
 
 
 
-  <title>分类: communication | 秉忠贞之诚,守退让之实</title>
+  <title>leetcode 34 在排序数组中查找元素的第一个和最后一个位置 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -244,79 +249,249 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>communication<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/leetcode_34/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/20/匹配滤波器为什么输出最大信噪比/" itemprop="url">
-              
-                <span itemprop="name">匹配滤波器为什么输出最大信噪比</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">leetcode 34 在排序数组中查找元素的第一个和最后一个位置</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-20T10:50:10+08:00" content="2019-06-20">
-          06-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T19:16:05+08:00">
+                2019-06-26
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。</p>
+<a id="more"></a>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。<br>你的算法时间复杂度必须是 O(log n) 级别。<br>如果数组中不存在目标值，返回 [-1, -1]。<br>示例 1:<br>输入: nums = [5,7,7,8,8,10], target = 8<br>输出: [3,4]<br>示例 2:<br>输入: nums = [5,7,7,8,8,10], target = 6<br>输出: [-1,-1]</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>就是按照二分法的方法首先找到目标元素，然后在进行前后拓展，情况最差的时候会退化成log（n）。</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>class Solution {
+public:
+vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
+    int left=0;
+    int right=nums.size()-1;
+    int index=-1;
+    while(left&lt;=right)
+    {
+        int mid=left+((right-left)&gt;&gt;1);
+        if(nums[mid]==target)
+        {
+            index=mid;
+            break;
+        }
+        else if(nums[mid]&lt;target)
+        {
+            left=left+1;
+        }
+        else
+            right-=1;
+    }
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/24/higher_order/" itemprop="url">
-              
-                <span itemprop="name">最近通信的学习总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-24T15:58:53+08:00" content="2019-01-24">
-          01-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    if(index==-1)
+        return {-1,-1};
+    vector&lt;int&gt;res;
+    left=index;
+    right=index;
+    while(0&lt;=left&amp;&amp;nums[left]==target)
+    {
+        left--;
+    }
+    res.push_back(left+1);
+    while(right&lt;nums.size()&amp;&amp;nums[right]==target)
+    {
+        right++;
+    }
+    res.push_back(right-1);
+    return res;
+}
+};
+</code></pre><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>这个是复杂度为2logn的，所以满足要求，或者说我们可以将目标数值减去0.5，然后找出大于它的最小的数值。</p>
+<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><pre><code>     vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
+    //明显的二分查找,注意不能找到左边缘再循环遍历到右边缘，因为可能整个数组都是这个数，这样复杂度就是变成n+logn了
+    //所以我这里可以分别找左右边缘
+    if(nums.empty()) return {-1,-1};
+    if(target&lt;nums.front()||target&gt;nums.back()) return {-1,-1};//左右边缘会异常，所以单独处理
+    int i=0,j=nums.size()-1,mid;
+    while(i&lt;=j){//找到左边
+        mid=(j-i)/2+i;
+        if(nums[mid]&gt;=target){
+            j=mid-1;
+        }else{
+            i=mid+1;
+        }
+    }
+    if(nums[i]!=target) return {-1,-1};
+    int begin=i;
+    j=nums.size()-1;
+    while(i&lt;=j){//从左边缘到最后开始继续二分找到右边缘
+        mid=(j-i)/2+i;
+        if(nums[mid]&gt;target){
+            j=mid-1;
+        }else{
+            i=mid+1;
+        }
+    }
+    return {begin,j};
+}
+</code></pre>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/24/6月c++学习/" rel="next" title="6月c++学习">
+                <i class="fa fa-chevron-left"></i> 6月c++学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/7月数据结构学习/" rel="prev" title="7月数据结构学习">
+                7月数据结构学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -324,6 +499,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -344,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -421,6 +609,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">5.</span> <span class="nav-text">code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -575,6 +779,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
