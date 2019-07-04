@@ -89,7 +89,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/2.png">
-<meta property="og:updated_time" content="2019-07-03T14:06:24.728Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/3.png">
+<meta property="og:updated_time" content="2019-07-04T07:41:33.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7月数据结构学习">
 <meta name="twitter:description" content="浙大 陈越何钦铭老师的数据结构课程学习">
@@ -365,8 +366,12 @@
 <p>数据结构目前并没有一个官方定义，但是数据结构与算法往往是联系在一起的。<br>我们解决一个实际的问题的效率，与数据的组织方式有关，与空间的利用效率有关，与算法的巧妙程度也有关。（例如递归往往看起来清晰易懂，但是空间占用很高）<br>数据结构可以解释为数据对象在计算机中的组织方式（逻辑结构与物理存储结构），数据对象的组织形式一定是与一系列加在它身上的操作所相关联的，完成这些操作的方法我们就称为算法。</p>
 <p>ADT（抽象数据类型）<br>数据类型是指数据对象集，数据集合相关联的操作集。<br>抽象是指描述数据类型的方法与操作并不依赖与具体实现，与机器与实现操作的算法和编程语言均无关。</p>
 <p>那什么又是算法呢？<br>一个有限的指令集，可以接受一些输入（或者无输入），产生输出，并且一定是在有限步骤之后终止，每一条指令都必须有充分明确的目标，不可以有歧义，在计算机的处理范围之内，描述不应该依赖于某一种计算机语言以及十分具体的实现手段（例如规定是数组还是链表呀，或者函数是自定义还是宏，这些不应当是算法所考虑的问题）。</p>
-<p>算法的评判标准：<br>（1）空间复杂度，考察算法写成的程序在执行时占用的存储单元的长度。<br>（2）时间复杂度，考察算法写成的程序在执行时耗费时间的长短。<br>针对上面的两个复杂度，一般情况下，我们关注算法的两种复杂度形式，一是最坏情况复杂度，二是平均复杂度。尽量不要出现一个n平方或立方的程序，因为n2或n3会出现指数爆炸增长，时间很恐怖，有生之年系列。<br><img src="/2019/07/03/7月数据结构学习/1.png" alt=""><br>例如一个最大子序和问题就会存在三种解法：（1）暴力解法 n的平方（2）分治算法 nlog（n）（3）动态规划 n。时间差距很大。<br><img src="/2019/07/03/7月数据结构学习/2.png" alt=""><br>分治算法的程序如下：<br>    int Max3( int A, int B, int C )<br>    { /<em> 返回3个整数中的最大值 </em>/<br>        return A &gt; B ? A &gt; C ? A : C : B &gt; C ? B : C;<br>    }</p>
-<pre><code>int DivideAndConquer( int List[], int left, int right )
+<p>算法的评判标准：<br>（1）空间复杂度，考察算法写成的程序在执行时占用的存储单元的长度。<br>（2）时间复杂度，考察算法写成的程序在执行时耗费时间的长短。<br>针对上面的两个复杂度，一般情况下，我们关注算法的两种复杂度形式，一是最坏情况复杂度，二是平均复杂度。尽量不要出现一个n平方或立方的程序，因为n2或n3会出现指数爆炸增长，时间很恐怖，有生之年系列。<br><img src="/2019/07/03/7月数据结构学习/1.png" alt=""><br>例如一个最大子序和问题就会存在三种解法：（1）暴力解法 n的平方（2）分治算法 nlog（n）（3）动态规划 n。时间差距很大。<br><img src="/2019/07/03/7月数据结构学习/2.png" alt=""><br>分治算法的程序如下：</p>
+<pre><code>int Max3( int A, int B, int C )
+{ /* 返回3个整数中的最大值 */
+    return A &gt; B ? A &gt; C ? A : C : B &gt; C ? B : C;
+}
+int DivideAndConquer( int List[], int left, int right )
 { /* 分治法求List[left]到List[right]的最大子列和 */
 int MaxLeftSum, MaxRightSum; /* 存放左右子问题的解 */
 int MaxLeftBorderSum, MaxRightBorderSum; /*存放跨分界线的结果*/
@@ -408,7 +413,367 @@ int MaxSubseqSum3( int List[], int N )
 { /* 保持与前2种算法相同的函数接口 */
     return DivideAndConquer( List, 0, N-1 );
 }
-</code></pre>
+</code></pre><p>什么是线性表：<br>它的定义是由同类型的数据元素构成的有序序列的线性结构，表中元素的个数称为其长度，没有元素时为空表，表起始位置称为表头，表的结束位置称为表尾。<br>（1）顺序存储结构，利用数组的连续存储空间顺序存放线性表的元素。<br>（2）链表结构，不要求在逻辑上相邻的两个元素在物理上也相邻，通过链建立起了数据元素之间的逻辑关系。插入和删除操作不需要移动数据元素，只需要修改链。<br>广义表<br>（1）多重链表<br>多重链表：链表中的节点可能同时隶属于多个链，多重链表中结点的指针域会有多个，如前面例子包含了Next和SubList两个指针域；但包含两个指针域的链表并不一定是多重链表，比如在双向链表不是多重链表。<br>多重链表有广泛的用途：基本上如树、图这样相对复杂的数据结构都可以采用多重链表方式实现存储。</p>
+<p>顺序存储代码如下：</p>
+<pre><code>typedef int Position;
+typedef struct LNode *List;
+struct LNode {
+    ElementType Data[MAXSIZE];
+    Position Last;
+};
+/* 初始化 */
+List MakeEmpty()
+{
+    List L;
+    L = (List)malloc(sizeof(struct LNode));
+    L-&gt;Last = -1;
+
+    return L;
+}
+/* 查找 */
+#define ERROR -1
+Position Find( List L, ElementType X )
+{
+    Position i = 0;
+
+    while( i &lt;= L-&gt;Last &amp;&amp; L-&gt;Data[i]!= X )
+        i++;
+    if ( i &gt; L-&gt;Last )  return ERROR; /* 如果没找到，返回错误信息 */
+    else  return i;  /* 找到后返回的是存储位置 */
+}
+
+/* 插入 */
+/*注意:在插入位置参数P上与课程视频有所不同，课程视频中i是序列位序（从1开始），这里P是存储下标位置（从0开始），两者差1*/
+bool Insert( List L, ElementType X, Position P ) 
+{ /* 在L的指定位置P前插入一个新元素X */
+    Position i;
+
+    if ( L-&gt;Last == MAXSIZE-1) {
+        /* 表空间已满，不能插入 */
+        printf(&quot;表满&quot;); 
+        return false; 
+    }  
+    if ( P&lt;0 || P&gt;L-&gt;Last+1 ) { /* 检查插入位置的合法性 */
+        printf(&quot;位置不合法&quot;);
+        return false; 
+    } 
+    for( i=L-&gt;Last; i&gt;=P; i-- )
+        L-&gt;Data[i+1] = L-&gt;Data[i]; /* 将位置P及以后的元素顺序向后移动 */
+    L-&gt;Data[P] = X;  /* 新元素插入 */
+    L-&gt;Last++;       /* Last仍指向最后元素 */
+    return true; 
+} 
+
+/* 删除 */
+/*注意:在删除位置参数P上与课程视频有所不同，课程视频中i是序列位序（从1开始），这里P是存储下标位置（从0开始），两者差1*/
+bool Delete( List L, Position P )
+{ /* 从L中删除指定位置P的元素 */
+    Position i;
+    if( P&lt;0 || P&gt;L-&gt;Last ) { /* 检查空表及删除位置的合法性 */
+        printf(&quot;位置%d不存在元素&quot;, P ); 
+        return false; 
+    }
+    for( i=P+1; i&lt;=L-&gt;Last; i++ )
+        L-&gt;Data[i-1] = L-&gt;Data[i]; /* 将位置P+1及以后的元素顺序向前移动 */
+    L-&gt;Last--; /* Last仍指向最后元素 */
+    return true;   
+}
+</code></pre><p>链式存储代码如下：</p>
+<pre><code>typedef struct LNode *PtrToLNode;
+struct LNode {
+    ElementType Data;
+    PtrToLNode Next;
+};
+typedef PtrToLNode Position;
+typedef PtrToLNode List;//PtrToLNode是指针吧？
+/* 查找 */
+#define ERROR NULL
+Position Find( List L, ElementType X )
+{
+    Position p = L; /* p指向L的第1个结点 */
+
+    while ( p &amp;&amp; p-&gt;Data!=X )
+        p = p-&gt;Next;
+
+    /* 下列语句可以用 return p; 替换 */
+    if ( p )
+        return p;
+    else
+        return ERROR;
+}
+/* 带头结点的插入 */
+/*注意:在插入位置参数P上与课程视频有所不同，课程视频中i是序列位序（从1开始），这里P是链表结点指针，在P之前插入新结点 */
+bool Insert( List L, ElementType X, Position P )
+{ /* 这里默认L有头结点 */
+    Position tmp, pre;
+
+    /* 查找P的前一个结点 */        
+    for ( pre=L; pre&amp;&amp;pre-&gt;Next!=P; pre=pre-&gt;Next ) ;            
+    if ( pre==NULL ) { /* P所指的结点不在L中 */
+        printf(&quot;插入位置参数错误\n&quot;);
+        return false;
+    }
+    else { /* 找到了P的前一个结点pre */
+        /* 在P前插入新结点 */
+        tmp = (Position)malloc(sizeof(struct LNode)); /* 申请、填装结点 */
+        tmp-&gt;Data = X; 
+        tmp-&gt;Next = P;
+        pre-&gt;Next = tmp;
+        return true;
+    }
+}
+
+/* 带头结点的删除 */
+/*注意:在删除位置参数P上与课程视频有所不同，课程视频中i是序列位序（从1开始），这里P是拟删除结点指针 */
+bool Delete( List L, Position P )
+{ /* 这里默认L有头结点 */
+    Position tmp, pre;
+
+    /* 查找P的前一个结点 */        
+    for ( pre=L; pre&amp;&amp;pre-&gt;Next!=P; pre=pre-&gt;Next ) ;            
+    if ( pre==NULL || P==NULL) { /* P所指的结点不在L中 */
+        printf(&quot;删除位置参数错误\n&quot;);
+        return false;
+    }
+    else { /* 找到了P的前一个结点pre */
+        /* 将P位置的结点删除 */
+        pre-&gt;Next = P-&gt;Next;
+        free(P);
+        return true;
+    }
+}
+</code></pre><p>通过对比上述两端代码，我们可以明确发现，链式存储在插入和删除时不需要移动其它的元素，但是需要挨个查找元素，各有千秋。</p>
+<p>什么是堆栈？<br>我们需要某种特定的存储方式，能够实现顺序存储运算数，但是倒序输出。抽象表现形式就是具有一定的操作约束的线性表，只能在一端进行插入删除操作，属于一个后入先出（last in first out）。我们可以采用链表来实现这一数据结构，其实就是一个单链表，然后将表头设置为链栈的尾部。栈在很多方面都有利用：函数的调用以及递归实现、深度优先搜索、回溯算法。<br>分别尝试利用顺序存储和链式存储实现堆栈。<br>（1）顺序存储</p>
+<pre><code>typedef int Position;
+struct SNode {
+    ElementType *Data; /* 存储元素的数组 */
+    Position Top;      /* 栈顶指针 */
+    int MaxSize;       /* 堆栈最大容量 */
+};
+typedef struct SNode *Stack;
+Stack CreateStack( int MaxSize )
+{
+    Stack S = (Stack)malloc(sizeof(struct SNode));
+    S-&gt;Data = (ElementType *)malloc(MaxSize * sizeof(ElementType));
+    S-&gt;Top = -1;
+    S-&gt;MaxSize = MaxSize;
+    return S;
+}
+
+bool IsFull( Stack S )
+{
+    return (S-&gt;Top == S-&gt;MaxSize-1);
+}
+
+bool Push( Stack S, ElementType X )
+{
+    if ( IsFull(S) ) {
+        printf(&quot;堆栈满&quot;);
+        return false;
+    }
+    else {
+        S-&gt;Data[++(S-&gt;Top)] = X;
+        return true;
+    }
+}
+
+bool IsEmpty( Stack S )
+{
+    return (S-&gt;Top == -1);
+}
+
+ElementType Pop( Stack S )
+{
+    if ( IsEmpty(S) ) {
+        printf(&quot;堆栈空&quot;);
+        return ERROR; /* ERROR是ElementType的特殊值，标志错误 */
+    }
+    else 
+        return ( S-&gt;Data[(S-&gt;Top)--] );
+}
+</code></pre><p>（2）链式存储</p>
+<pre><code>typedef struct SNode *PtrToSNode;
+struct SNode {
+    ElementType Data;
+    PtrToSNode Next;
+};
+typedef PtrToSNode Stack;
+Stack CreateStack( ) 
+{ /* 构建一个堆栈的头结点，返回该结点指针 */
+    Stack S;
+    S = (Stack)malloc(sizeof(struct SNode));
+    S-&gt;Next = NULL;
+    return S;
+}
+bool IsEmpty ( Stack S )
+{ /* 判断堆栈S是否为空，若是返回true；否则返回false */
+    return ( S-&gt;Next == NULL );
+}
+
+bool Push( Stack S, ElementType X )
+{ /* 将元素X压入堆栈S */
+    PtrToSNode TmpCell;
+
+    TmpCell = (PtrToSNode)malloc(sizeof(struct SNode));
+    TmpCell-&gt;Data = X;
+    TmpCell-&gt;Next = S-&gt;Next;
+    S-&gt;Next = TmpCell;
+    return true;
+}
+ElementType Pop( Stack S )  
+{ /* 删除并返回堆栈S的栈顶元素 */
+    PtrToSNode FirstCell;
+    ElementType TopElem;
+
+    if( IsEmpty(S) ) {
+        printf(&quot;堆栈空&quot;); 
+        return ERROR;
+    }
+    else {
+        FirstCell = S-&gt;Next; 
+        TopElem = FirstCell-&gt;Data;
+        S-&gt;Next = FirstCell-&gt;Next;
+        free(FirstCell);
+        return TopElem;
+    }
+}
+</code></pre><p>什么是队列？<br>队列和堆栈有点类似，都是具有一定操作约束的线性表，但是也有不同，插入只能在一段插入，而在另一端删除。队列也有顺序存储和链式存储两种方式，不过不同的是，队列需要两个变量，一个记录头元素位置的变量front以及一个记录尾元素位置的变量rear。顺序存储，因为队列的特殊性，所以可以通过程序将物理上不是环形的队列构成逻辑上环形的队列。链式存储，依然还是依靠单链表进行存储。<br>（1）顺序存储</p>
+<pre><code>typedef int Position;
+struct QNode {
+    ElementType *Data;     /* 存储元素的数组 */
+    Position Front, Rear;  /* 队列的头、尾指针 */
+    int MaxSize;           /* 队列最大容量 */
+};
+typedef struct QNode *Queue;
+Queue CreateQueue( int MaxSize )
+{
+    Queue Q = (Queue)malloc(sizeof(struct QNode));
+    Q-&gt;Data = (ElementType *)malloc(MaxSize * sizeof(ElementType));
+    Q-&gt;Front = Q-&gt;Rear = 0;
+    Q-&gt;MaxSize = MaxSize;
+    return Q;
+}
+
+bool IsFull( Queue Q )
+{
+    return ((Q-&gt;Rear+1)%Q-&gt;MaxSize == Q-&gt;Front);
+}
+
+bool AddQ( Queue Q, ElementType X )
+{
+    if ( IsFull(Q) ) {
+        printf(&quot;队列满&quot;);
+        return false;
+    }
+    else {
+        Q-&gt;Rear = (Q-&gt;Rear+1)%Q-&gt;MaxSize;//由此可见，留了一个空位。
+        Q-&gt;Data[Q-&gt;Rear] = X;
+        return true;
+    }
+}
+
+bool IsEmpty( Queue Q )
+{
+    return (Q-&gt;Front == Q-&gt;Rear);
+}
+
+ElementType DeleteQ( Queue Q )
+{
+    if ( IsEmpty(Q) ) { 
+        printf(&quot;队列空&quot;);
+        return ERROR;
+    }
+    else  {
+        Q-&gt;Front =(Q-&gt;Front+1)%Q-&gt;MaxSize;//front指向的是第一个空的位置，这个位置后面跟着第一个元素。。
+        return  Q-&gt;Data[Q-&gt;Front];
+    }
+}
+</code></pre><p>（2）链式存储</p>
+<pre><code>typedef struct Node *PtrToNode;
+struct Node { /* 队列中的结点 */
+    ElementType Data;
+    PtrToNode Next;
+};
+typedef PtrToNode Position;
+
+struct QNode {
+    Position Front, Rear;  /* 队列的头、尾指针 */
+    int MaxSize;           /* 队列最大容量 */
+};
+typedef struct QNode *Queue;
+
+bool IsEmpty( Queue Q )
+{
+    return ( Q-&gt;Front == NULL);
+}
+
+ElementType DeleteQ( Queue Q )
+{
+    Position FrontCell; 
+    ElementType FrontElem;
+
+    if  ( IsEmpty(Q) ) {
+        printf(&quot;队列空&quot;);
+        return ERROR;
+    }
+    else {
+        FrontCell = Q-&gt;Front;
+        if ( Q-&gt;Front == Q-&gt;Rear ) /* 若队列只有一个元素 */
+            Q-&gt;Front = Q-&gt;Rear = NULL; /* 删除后队列置为空 */
+        else                     
+            Q-&gt;Front = Q-&gt;Front-&gt;Next;
+        FrontElem = FrontCell-&gt;Data;
+
+        free( FrontCell );  /* 释放被删除结点空间  */
+        return  FrontElem;
+    }
+}
+int AddQ( Queue Q, ElementType X )
+{
+        Position FrontCell=(Position)malloc(sizeof(struct Node));
+        FrontCell-&gt;Data=X;
+        FrontCell-&gt;Next=NULL;
+        if(IsEmpty(Q))
+        {
+            Q-&gt;Front=Q-&gt;Rear=FrontCell;
+            Q-&gt;Rear=Q-&gt;Rear-&gt;Next;
+        }
+        else
+        {
+            Q-&gt;Rear-&gt;Next=FrontCell;
+            Q-&gt;Rear=Q-&gt;Rear-&gt;Next;
+        }
+        return 1;
+
+}
+int main()
+{
+    int m;
+    Queue Q=(Queue)malloc(sizeof(struct QNode));
+    Q-&gt;Front = Q-&gt;Rear = NULL;
+    AddQ(Q,45);
+    m=DeleteQ(Q);
+    printf(&quot;%d &quot;,m);
+
+    AddQ(Q,453);
+    m=DeleteQ(Q);
+    printf(&quot;%d &quot;,m);
+
+    AddQ(Q,451);
+    m=DeleteQ(Q);
+    printf(&quot;%d &quot;,m);
+
+    AddQ(Q,425);
+    m=DeleteQ(Q);
+    printf(&quot;%d &quot;,m);
+    m=DeleteQ(Q);
+    printf(&quot;%d &quot;,m);
+    system(&quot;pause&quot;);
+    return 0;
+
+}
+</code></pre><p>输出结果如下图所示：<br><img src="/2019/07/03/7月数据结构学习/3.png" alt=""></p>
+
       
     </div>
     
@@ -520,7 +885,7 @@ int MaxSubseqSum3( int List[], int N )
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -531,7 +896,7 @@ int MaxSubseqSum3( int List[], int N )
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
