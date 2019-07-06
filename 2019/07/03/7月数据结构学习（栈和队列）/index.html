@@ -82,19 +82,19 @@
 <meta name="description" content="浙大 陈越何钦铭老师的数据结构课程学习">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7月数据结构学习">
-<meta property="og:url" content="http://yoursite.com/2019/07/03/7月数据结构学习/index.html">
+<meta property="og:title" content="7月数据结构学习（栈和队列）">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
 <meta property="og:description" content="浙大 陈越何钦铭老师的数据结构课程学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/3.png">
-<meta property="og:updated_time" content="2019-07-04T07:41:33.934Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/3.png">
+<meta property="og:updated_time" content="2019-07-04T13:17:10.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="7月数据结构学习">
+<meta name="twitter:title" content="7月数据结构学习（栈和队列）">
 <meta name="twitter:description" content="浙大 陈越何钦铭老师的数据结构课程学习">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/03/7月数据结构学习/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/1.png">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/03/7月数据结构学习/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/">
 
 
 
 
 
-  <title>7月数据结构学习 | 秉忠贞之诚,守退让之实</title>
+  <title>7月数据结构学习（栈和队列） | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/7月数据结构学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/7月数据结构学习（栈和队列）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小霸王孙无月">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">7月数据结构学习</h1>
+          <h1 class="post-title" itemprop="name headline">7月数据结构学习（栈和队列）</h1>
         
 
         <div class="post-meta">
@@ -366,7 +366,7 @@
 <p>数据结构目前并没有一个官方定义，但是数据结构与算法往往是联系在一起的。<br>我们解决一个实际的问题的效率，与数据的组织方式有关，与空间的利用效率有关，与算法的巧妙程度也有关。（例如递归往往看起来清晰易懂，但是空间占用很高）<br>数据结构可以解释为数据对象在计算机中的组织方式（逻辑结构与物理存储结构），数据对象的组织形式一定是与一系列加在它身上的操作所相关联的，完成这些操作的方法我们就称为算法。</p>
 <p>ADT（抽象数据类型）<br>数据类型是指数据对象集，数据集合相关联的操作集。<br>抽象是指描述数据类型的方法与操作并不依赖与具体实现，与机器与实现操作的算法和编程语言均无关。</p>
 <p>那什么又是算法呢？<br>一个有限的指令集，可以接受一些输入（或者无输入），产生输出，并且一定是在有限步骤之后终止，每一条指令都必须有充分明确的目标，不可以有歧义，在计算机的处理范围之内，描述不应该依赖于某一种计算机语言以及十分具体的实现手段（例如规定是数组还是链表呀，或者函数是自定义还是宏，这些不应当是算法所考虑的问题）。</p>
-<p>算法的评判标准：<br>（1）空间复杂度，考察算法写成的程序在执行时占用的存储单元的长度。<br>（2）时间复杂度，考察算法写成的程序在执行时耗费时间的长短。<br>针对上面的两个复杂度，一般情况下，我们关注算法的两种复杂度形式，一是最坏情况复杂度，二是平均复杂度。尽量不要出现一个n平方或立方的程序，因为n2或n3会出现指数爆炸增长，时间很恐怖，有生之年系列。<br><img src="/2019/07/03/7月数据结构学习/1.png" alt=""><br>例如一个最大子序和问题就会存在三种解法：（1）暴力解法 n的平方（2）分治算法 nlog（n）（3）动态规划 n。时间差距很大。<br><img src="/2019/07/03/7月数据结构学习/2.png" alt=""><br>分治算法的程序如下：</p>
+<p>算法的评判标准：<br>（1）空间复杂度，考察算法写成的程序在执行时占用的存储单元的长度。<br>（2）时间复杂度，考察算法写成的程序在执行时耗费时间的长短。<br>针对上面的两个复杂度，一般情况下，我们关注算法的两种复杂度形式，一是最坏情况复杂度，二是平均复杂度。尽量不要出现一个n平方或立方的程序，因为n2或n3会出现指数爆炸增长，时间很恐怖，有生之年系列。<br><img src="/2019/07/03/7月数据结构学习（栈和队列）/1.png" alt=""><br>例如一个最大子序和问题就会存在三种解法：（1）暴力解法 n的平方（2）分治算法 nlog（n）（3）动态规划 n。时间差距很大。<br><img src="/2019/07/03/7月数据结构学习（栈和队列）/2.png" alt=""><br>分治算法的程序如下：</p>
 <pre><code>int Max3( int A, int B, int C )
 { /* 返回3个整数中的最大值 */
     return A &gt; B ? A &gt; C ? A : C : B &gt; C ? B : C;
@@ -772,7 +772,7 @@ int main()
     return 0;
 
 }
-</code></pre><p>输出结果如下图所示：<br><img src="/2019/07/03/7月数据结构学习/3.png" alt=""></p>
+</code></pre><p>输出结果如下图所示：<br><img src="/2019/07/03/7月数据结构学习（栈和队列）/3.png" alt=""></p>
 
       
     </div>
@@ -885,7 +885,7 @@ int main()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -896,7 +896,7 @@ int main()
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -907,7 +907,7 @@ int main()
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

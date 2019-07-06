@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="二叉搜索树、二叉平衡树">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构树的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/index.html">
+<meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="二叉搜索树、二叉平衡树">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/10.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/11.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/12.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/13.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/14.png">
+<meta property="og:updated_time" content="2019-07-06T05:26:26.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构树的学习">
+<meta name="twitter:description" content="二叉搜索树、二叉平衡树">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/04/7月学习数据结构（树）/">
+
+
+
+
+
+  <title>数据结构树的学习 | 秉忠贞之诚,守退让之实</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秉忠贞之诚,守退让之实</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/04/7月学习数据结构（树）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构树的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T21:22:01+08:00">
+                2019-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构学习/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>二叉搜索树、二叉平衡树<br><a id="more"></a><br>因为客观世界中的许多事物存在着层次关系，所以树这种结构能够很好的表示这种层次关系。通过这种分层次组织在管理上具有更高的效率，典型例子之一就是基本操作查找（二分查找如下图所示），查找分为静态查找（无插入和删除操作）和动态查找（包括插入和删除）。<br><img src="/2019/07/04/7月学习数据结构（树）/1.png" alt=""><br>从上图我们可以看出，这是将一个顺序存储的组织方式转换成了一个分层次的树形结构来进行查找，可以明显看出，查找速度从顺序查找的o(n)变成了o(log(n))。<br>树的几个定义：<br>（1）子树不相交<br>（2）根节点之外，每个节点有且仅有一个父节点<br>（3）N个节点的树有N-1条边。<br>树的一些基本术语：<br>（1）节点的度：节点的子树的个数<br>（2）树的度：树的所有的节点中最大的度数<br>（3）叶节点：度为0的点<br>（4）父节点：有子树的节点是其子树的根节点的父节点<br>（5）子节点：是父节点的子节点<br>（6）兄弟节点：具有同一父节点的各节点彼此为兄弟节点<br>（7）路径和路径长度：路径所包含的边为路径长度，路径指的是两个节点之间的序列（n1，n2，n3…..nk），其中ni是ni+1的父节点。<br>（8）祖先节点：沿树根到某一结点路径上的所有结点都是这个结点的祖先结点<br>（9）子孙结点(Descendant)：某一结点的子树中的所有结点是这个结点的子孙<br>（10）结点的层次（Level）：规定根结点在1层，其它任一结点的层数是其父结点的层数加1<br>（11）树的深度（Depth）：树中所有结点中的最大层次是这棵树的深度<br>树的表示我们采用儿子——兄弟表示法：<br><img src="/2019/07/04/7月学习数据结构（树）/2.png" alt=""><br><img src="/2019/07/04/7月学习数据结构（树）/3.png" alt=""></p>
+<p>二叉树有完美二叉树（满二叉树）和完全二叉树（有n个结点的二叉树，对树中结点按从上至下、从左到右顺序进行编号，编号为i（1 ≤ i ≤ n）结点与满二叉树中编号为 i 结点在二叉树中位置相同），完美二叉树和完全二叉树可以用顺序存储来表示，比较简单方便。<br>二叉树具有几个重要的性质：<br>（1）一个二叉树第i层最大的节点数为：2e(i-1),i&gt;=1<br>（2）深度为k的二叉树最多拥有2e(k)-1个节点，k&gt;=1<br>（3）对于任何非空二叉树T，若n0表示叶节点的个数、n2是度为2的非叶节点个数，那两者一定满足关系n0=n2+1；<br>    证明：已知一个有用n个点的二叉树的边为n-1条，那么拥有度为2的节点记为n2，度为1的记为n1，度为0的记为n0（也就是叶节点），由二叉树的性质我们可知：n0+n1+n2=0<em>n0+1</em>n1+2*n2+1，两边进行正负抵消可得：n0=n2+1；<br>接下来介绍二叉树的存储结构，上面我们说过，因为完全二叉树的性质，所以我们用顺序存储结构可以很好的表示它，如下图所示：<br><img src="/2019/07/04/7月学习数据结构（树）/4.png" alt=""></p>
+<p>但是一般的二叉树采用这种存储方式会造成很大的空间浪费，所以采用链表存储，代码如下：</p>
+<pre><code>typedef struct TNode *Position;
+typedef Position BinTree; /* 二叉树类型 */
+struct TNode{ /* 树结点定义 */
+    ElementType Data; /* 结点数据 */
+    BinTree Left;     /* 指向左子树 */
+    BinTree Right;    /* 指向右子树 */
+};
+</code></pre><p>二叉树具有四种遍历方式：<br>（1）先序遍历<br>遍历的过程为：首先访问根节点，先序访问其左子树，先序访问其右子树，代码如下：</p>
+<pre><code>void PreOrderTraversal( BinTree BT )
+{
+ if( BT ) {
+ printf(“%d”, BT-&gt;Data);
+ PreOrderTraversal( BT-&gt;Left );
+ PreOrderTraversal( BT-&gt;Right );
+ }
+}
+</code></pre><p>（2）中序遍历<br>遍历过程为：首先中序遍历其左子树，访问根结点，中序遍历其右子树，代码如下：</p>
+<pre><code>void InOrderTraversal( BinTree BT )
+{
+ if( BT ) {
+ InOrderTraversal( BT-&gt;Left );
+ printf(“%d”, BT-&gt;Data);
+ InOrderTraversal( BT-&gt;Right );
+ }
+}
+</code></pre><p>（3）后序遍历<br>遍历过程为：后序遍历其左子树，后序遍历其右子树，访问根结点，代码如下:</p>
+<pre><code>void PostOrderTraversal( BinTree BT )
+{
+ if( BT ) {
+ PostOrderTraversal( BT-&gt;Left );
+ PostOrderTraversal( BT-&gt;Right);
+ printf(“%d”, BT-&gt;Data);
+ }
+}
+</code></pre><p>我们通过一张图可以看出三者的遍历顺序是一样的，只是说访问节点的时机不同：<br><img src="/2019/07/04/7月学习数据结构（树）/5.png" alt=""></p>
+<p>递归的访问比较简单，那我们如何实现非递归的访问呢，递归是利用了堆栈存储函数状态，我们非递归直接利用堆栈存储节点。<br>（1）中序遍历<br>当遇到一个节点，将其压入栈中，并去访问其左子树，左子树遍历结束后，从栈顶弹出这个节点并访问它，然后按照其右指针再去中序遍历该节点的右子树，代码如下：</p>
+<pre><code>void InOrderTraversal( BinTree BT )
+{ BinTree T=BT;
+    Stack S = CreatStack( MaxSize ); /*创建并初始化堆栈S*/
+    while( T || !IsEmpty(S) ){
+         while(T){ /*一直向左并将沿途结点压入堆栈*/
+                 Push(S,T);
+                 T = T-&gt;Left;
+         }
+         if(!IsEmpty(S)){
+             T = Pop(S); /*结点弹出堆栈*/
+             printf(“%5d”, T-&gt;Data); /*（访问）打印结点*/
+             T = T-&gt;Right; /*转向右子树*/
+         }
+    }
+}
+</code></pre><p>（2）先序遍历<br>由我们之前说过的可以得知，三种遍历方式顺序相同，只是访问节点的时机不同，所以我们通过改变“printf(“%5d”, T-&gt;Data);”语句的位置就可以实现不同的遍历方式，代码如下：</p>
+<pre><code>void PreOrderTraversal( BinTree BT )
+{ BinTree T BT;
+    Stack S = CreatStack( MaxSize ); /*创建并初始化堆栈S*/
+    while( T || !IsEmpty(S) ){
+         while(T){ /*一直向左并将沿途结点压入堆栈*/
+             printf(“%5d”, T-&gt;Data); /*（访问）打印结点*/
+             Push(S,T);
+             T = T-&gt;Left;
+             }
+         if(!IsEmpty(S)){
+             T = Pop(S); /*结点弹出堆栈*/
+             T = T-&gt;Right; /*转向右子树*/
+             }
+    }
+}
+</code></pre><p>（3）后序遍历<br>对于一个节点而言，要实现访问顺序为左儿子-右儿子-根节点，可以利用后进先出的栈，在节点不为空的前提下，依次将根节点，右儿子，左儿子压栈。故我们需要按照根节点-右儿子-左儿子的顺序遍历树，而我们已经知道先序遍历的顺序是根节点-左儿子-右儿子，故只需将先序遍历的左右调换并把访问方式打印改为压入另一个栈即可。最后一起打印栈中的元素。代码如下：</p>
+<pre><code>void PostOrderTraversal(BinTree BT)
+{
+    BinTree T = BT;
+    Stack S1 = CreatStack(MAX_SIZE);    //创建并初始化堆栈S1
+    Stack S2 = CreatStack(MAX_SIZE);    //创建并初始化堆栈S2   
+    while(T || !IsEmpty(S1))
+    {
+        while(T)        //一直向右并将沿途节点访问（压入S2）后压入堆栈S1 
+        {
+            Push(S2, T);
+            Push(S1, T);
+            T = T-&gt;Right;
+        }
+        if (!IsEmpty(S1))
+        {
+            T = Pop(S1);    //节点弹出堆栈
+            T = T-&gt;Left;  //转向左子树
+        }
+    }
+    while(!IsEmpty(S2))    //访问（打印）S2中元素
+    {
+        T = Pop(S2);
+        printf(&quot;%d\n&quot;, T-&gt;Data);
+    }          
+}
+</code></pre><p>上述三种遍历的c++实现：</p>
+<pre><code>vector&lt;int&gt; preorderTraversal(TreeNode* root) {
+    if(root==NULL)
+        return {};
+    vector&lt;int&gt;res;
+    stack&lt;TreeNode*&gt; fuzhu;
+    while(root||!fuzhu.empty())
+    {
+        while(root)
+        {
+            fuzhu.push(root);
+            res.push_back(root-&gt;val);
+            root=root-&gt;left;
+        }
+        if(!fuzhu.empty())
+        {
+            TreeNode* p=fuzhu.top();
+            fuzhu.pop();
+            root=p-&gt;right;
+        }
+    }
+    return res;
+}
+vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+    if(root==NULL)
+        return {};
+    vector&lt;int&gt;res;
+    stack&lt;TreeNode*&gt; fuzhu;
+    while(root||!fuzhu.empty())
+    {
+        while(root)
+        {
+            fuzhu.push(root);
+            root=root-&gt;left;
+        }
+        if(!fuzhu.empty())
+        {
+            TreeNode* p=fuzhu.top();
+            fuzhu.pop();
+            res.push_back(p-&gt;val);
+            root=p-&gt;right;
+        }
+    }
+    return res;
+}
+vector&lt;int&gt; postorderTraversal(TreeNode* root) {
+    if(root==NULL)
+        return {};
+    vector&lt;int&gt;res;
+    stack&lt;TreeNode*&gt; fuzhu1;
+    stack&lt;TreeNode*&gt; fuzhu2;
+    while(root||!fuzhu1.empty())
+    {
+        while(root)
+        {
+            fuzhu1.push(root);
+            fuzhu2.push(root);
+            root=root-&gt;right;
+        }
+        if(!fuzhu1.empty())
+        {
+            TreeNode* p=fuzhu1.top();
+            fuzhu1.pop();
+            root=p-&gt;left;
+        }
+    }
+    while(!fuzhu2.empty())
+        {
+            TreeNode* p=fuzhu2.top();
+            fuzhu2.pop();
+            res.push_back(p-&gt;val);
+        }
+    return res;
+}
+</code></pre><p>（4）层序遍历<br>其实遍历过程就是一个二维树结构的线性化，不同的遍历方式就是不同的线性化过程，层序遍历我们是利用队列实现的，首先从根结点开始，首先将根结点入队，然后开始执行循环：结点出队、访问该结点、其左右儿子入队，代码如下：</p>
+<pre><code>void LevelOrderTraversal ( BinTree BT )
+{   Queue Q; BinTree T;
+    if ( !BT ) return; /* 若是空树则直接返回 */
+    Q = CreatQueue( MaxSize ); /*创建并初始化队列Q*/
+    AddQ( Q, BT );
+    while ( !IsEmptyQ( Q ) )
+    {
+         T = DeleteQ( Q );
+        printf(“%d\n”, T-&gt;Data); /*访问取出队列的结点*/
+        if ( T-&gt;Left ) AddQ( Q, T-&gt;Left );
+        if ( T-&gt;Right ) AddQ( Q, T-&gt;Right );
+    }
+}
+</code></pre><p>遍历二叉树可以利用到许多实际例子当中去，比如说判断是否是叶子节点，我们只需要在遍历后输出的那一条语句上加上判断语句”!BT-Left &amp;&amp; !BT-&gt;Right”,就可以输出叶子节点。<br>例如求二叉树的高度，我们可以利用递归的方式进行求解：<br><img src="/2019/07/04/7月学习数据结构（树）/6.png" alt=""><br>二元运算表达式树也可以输出它的遍历，但是它的中序表达式会受到运算符优先级的影响不准确，但是先序和后序得到的表达式是正确的，解决中序的办法是加上括号，确保不受优先级影响。<br>通过两种遍历方式可以唯一确定一个二叉树，但是必须要有中序遍历，因为在只有先序和后序两种情况下，我们无法判断一个节点的左右，因为先序是根左右，后序是左右根，我们无法判断左右的界限在哪里。<br>那如何通过先序和中序（后序和中序同理）来确定一个二叉树呢，我们依然是利用递归的方式：<br><img src="/2019/07/04/7月学习数据结构（树）/7.png" alt=""><br>什么是二叉搜索树？<br>二叉搜索树也称为二叉排序树或者二叉查找树（BST），满足如下性质：<br>（1）非空左子树的所有健值小于其根节点的健值<br>（2）非空右子树的所有健值大于其根节点的健值<br>（3）左右子树都是二叉搜索树<br>我们默认二叉搜索树中没有两个相同的健值。<br>查找操作：类似于二分查找，比较节点健值，如果目标值大于节点健值，去右子树寻找，相等就返回，否则去左子树寻找，使用递归可以很容易的实现，代码如下：</p>
+<pre><code>Position Find（ElementType X，BinTree BST）
+｛
+    if(!BST)return NULL;
+    if(X&gt;BST-&gt;data)return Find(X,BST-&gt;right);
+    else if(X&lt;BST-&gt;data)return Find(X,BST-&gt;left);
+    elsereturn BST;
+｝
+</code></pre><p>非递归版本：</p>
+<pre><code>Position Find（ElementType X，BinTree BST）
+｛
+    while(BST)
+    {
+    if(X&gt;BST-&gt;data)
+        BST=BST-&gt;right;
+    else if(X&lt;BST-&gt;data)
+        BST=BST-&gt;left;
+    else
+        return BST;
+    }
+    return NULL;
+｝
+</code></pre><p>由于二叉搜索树的性质，所以我们明显可得最大元素一定是在树的最右分支的端节点上，最小元素一定是在树的最左分支的端节点上，代码如下：</p>
+<pre><code>Position FindMIN（BinTree BST）
+｛
+    if(BST)//不能一上来就用BST-&gt;left作为判断条件，因为空节点就会出错。
+    {
+        while(BST-&gt;left) BST=BST-&gt;left;
+    }
+    return BST;
+｝
+Position FindMAX（BinTree BST）
+｛
+    if(！BST)return NULL；
+    else if（BST-&gt;right） return FindMAX(BST-&gt;right);
+    else return BST;
+｝
+</code></pre><p>接下来就是二叉搜索树的插入问题了，这个的关键是寻找到可以进行插入的位置，我们可以用类似与find函数的操作，找到一个叶子节点，它是和节点最为接近的，代码如下：</p>
+<pre><code>BinTree Insert( ElementType X, BinTree BST )
+｛
+    if(!BST)
+    {
+    BST=malloc(sizeof(struct TreeNode));
+    BST-&gt;data=X;
+    BST-&gt;left=BST-&gt;right=NULL;
+    }
+else{
+    if(X&gt;BST-&gt;data)
+        {BST-&gt;right=Insert(X,BST-&gt;right);}
+    else if(X&lt;BST-&gt;data)//之所以要打成else if是因为还有X已经存在的情况，存在的情况我们默认是不进行处理的。
+        {BST-&gt;left=Insert(X,BST-&gt;right);}
+    }
+return BST;
+｝
+</code></pre><p>搜索树的删除就比较复杂，我们将要删除的点分为三种情况：<br>（1）是个叶子节点，直接进行删除。<br>（2）只有一颗的子树，那直接用那颗子树的根节点代替此节点即可，即将其父结点的指针指向要删除结点的孩子结点。<br>（3）最复杂的情况，两边子树都有，我们有两种方案进行删除，一是用左子树的最大节点代替被删除的节点，二是用右子树的最小节点代替被删除的节点。<br>代码：</p>
+<pre><code>BinTree Delete( BinTree BST, ElementType X ) 
+{ 
+    Position Tmp; 
+    if( !BST ) 
+        printf(&quot;要删除的元素未找到&quot;); 
+    else {
+        if( X &lt; BST-&gt;Data ) 
+            BST-&gt;Left = Delete( BST-&gt;Left, X );   /* 从左子树递归删除 */
+        else if( X &gt; BST-&gt;Data ) 
+            BST-&gt;Right = Delete( BST-&gt;Right, X ); /* 从右子树递归删除 */
+        else { /* BST就是要删除的结点 */
+            /* 如果被删除结点有左右两个子结点 */ 
+            if( BST-&gt;Left &amp;&amp; BST-&gt;Right ) {
+                /* 从右子树中找最小的元素填充删除结点 */
+                Tmp = FindMin( BST-&gt;Right );
+                BST-&gt;Data = Tmp-&gt;Data;
+                /* 从右子树中删除最小元素 */
+                BST-&gt;Right = Delete( BST-&gt;Right, BST-&gt;Data );
+            }
+            else { /* 被删除结点有一个或无子结点 */
+                Tmp = BST; 
+                if( !BST-&gt;Left )       /* 只有右孩子或无子结点 */
+                    BST = BST-&gt;Right; 
+                else                   /* 只有左孩子 */
+                    BST = BST-&gt;Left;
+                free( Tmp );//没有孩子就删除节点。
+            }
+        }
+    }
+    return BST;
+}
+</code></pre><p>删除部分也可以写为：</p>
+<pre><code>if( BST-&gt;Left &amp;&amp; BST-&gt;Right ) {
+        /* 从左子树中找最大的元素填充删除结点 */
+        Tmp = FindMAX( BST-&gt;left );
+        BST-&gt;Data = Tmp-&gt;Data;
+        /* 从右子树中删除最小元素 */
+        BST-&gt;left = Delete( BST-&gt;left, BST-&gt;Data );
+                }
+</code></pre><p>什么是平衡二叉树？<br>顾名思义，平衡两个字就代表了我们需要将左右两颗子树的高度控制一下，让其基本一致。单单对于二叉搜索树来说，不同的插入次序，将会导致不同的深度和平均查找长度，这在最差情况下，二叉搜索树退化成了一个线性存储了。所以我们加入一个平衡因子来对二叉搜索树进行平衡，一个节点的平衡因子是指一个节点的左子树和右子树之差的绝对值，我们在插入过程中要保证每个节点的平衡因子的值不得大于1.通过加入平衡因子，我们可以保证给定节点数为n的AVL树的最大高度为O（logn），证明如下：<br><img src="/2019/07/04/7月学习数据结构（树）/8.png" alt=""><br><img src="/2019/07/04/7月学习数据结构（树）/9.png" alt=""><br>那当二叉树插入之后不满足条件我们该如何进行调整？<br>首先，插入肯定是插入到叶子节点，插入后不满足条件的，那原本的叶子节点的平衡因子只能是0，所以，现在它变为-1，而它的父节点可能就变成-2，通过右单旋解决此问题，同理我们有左单旋，有左右双旋，有右左双旋，如图所示：<br><img src="/2019/07/04/7月学习数据结构（树）/10.png" alt=""><br><img src="/2019/07/04/7月学习数据结构（树）/11.png" alt=""><br><img src="/2019/07/04/7月学习数据结构（树）/12.png" alt=""><br><img src="/2019/07/04/7月学习数据结构（树）/13.png" alt=""><br>代码如下：</p>
+<pre><code>#include &lt;stdlib.h&gt;
+#include&lt;stdio.h&gt; 
+typedef struct AVLNode *Position;
+typedef Position AVLTree; /* AVL树类型 */
+typedef int ElementType;
+struct AVLNode{
+    ElementType Data; /* 结点数据 */
+    AVLTree Left;     /* 指向左子树 */
+    AVLTree Right;    /* 指向右子树 */
+    int Height;       /* 树高 */
+};
+
+int Max ( int a, int b )
+{
+    return a &gt; b ? a : b;
+}
+int GetHeight(AVLTree A )
+{
+    if(A==NULL)
+        return 0;
+    else
+        return A-&gt;Height;
+}
+AVLTree SingleLeftRotation ( AVLTree A )
+{ /* 注意：A必须有一个左子结点B */
+    /* 将A与B做左单旋，更新A与B的高度，返回新的根结点B */     
+
+    AVLTree B = A-&gt;Left;
+    A-&gt;Left = B-&gt;Right;
+    B-&gt;Right = A;
+    A-&gt;Height = Max( GetHeight(A-&gt;Left), GetHeight(A-&gt;Right) ) + 1;
+    B-&gt;Height = Max( GetHeight(B-&gt;Left), A-&gt;Height ) + 1;
+    return B;
+}
+AVLTree SingleRightRotation(AVLTree A)
+{
+    AVLTree B = A-&gt;Right;
+    A-&gt;Right = B-&gt;Left;
+    B-&gt;Left = A;
+    A-&gt;Height = Max( GetHeight(A-&gt;Left), GetHeight(A-&gt;Right) ) + 1;
+    B-&gt;Height = Max( GetHeight(B-&gt;Left), A-&gt;Height ) + 1;
+    return B;
+}
+
+AVLTree DoubleLeftRightRotation ( AVLTree A )
+{ /* 注意：A必须有一个左子结点B，且B必须有一个右子结点C */
+    /* 将A、B与C做两次单旋，返回新的根结点C */
+
+    /* 将B与C做右单旋，C被返回 */
+    A-&gt;Left = SingleRightRotation(A-&gt;Left);
+    /* 将A与C做左单旋，C被返回 */
+    return SingleLeftRotation(A);
+}
+
+AVLTree DoubleRightLeftRotation ( AVLTree A )
+{ /* 注意：A必须有一个左子结点B，且B必须有一个右子结点C */
+    /* 将A、B与C做两次单旋，返回新的根结点C */
+
+    /* 将B与C做右单旋，C被返回 */
+    A-&gt;Right = SingleLeftRotation(A-&gt;Right);
+    /* 将A与C做左单旋，C被返回 */
+    return SingleRightRotation(A);
+}
+
+/*************************************/
+/* 对称的右单旋与右-左双旋请自己实现 */
+/*************************************/
+
+AVLTree Insert( AVLTree T, ElementType X )
+{ /* 将X插入AVL树T中，并且返回调整后的AVL树 */
+    if ( !T ) { /* 若插入空树，则新建包含一个结点的树 */
+        T = (AVLTree)malloc(sizeof(struct AVLNode));
+        T-&gt;Data = X;
+        T-&gt;Height = 0;
+        T-&gt;Left = T-&gt;Right = NULL;
+    } /* if (插入空树) 结束 */
+
+    else if ( X &lt; T-&gt;Data ) {
+        /* 插入T的左子树 */
+        T-&gt;Left = Insert( T-&gt;Left, X);
+        /* 如果需要左旋 */
+        if ( GetHeight(T-&gt;Left)-GetHeight(T-&gt;Right) == 2 )
+            if ( X &lt; T-&gt;Left-&gt;Data ) 
+                T = SingleLeftRotation(T);      /* 左单旋 */
+            else 
+                T = DoubleLeftRightRotation(T); /* 左-右双旋 */
+    } /* else if (插入左子树) 结束 */
+
+    else if ( X &gt; T-&gt;Data ) {
+        /* 插入T的右子树 */
+        T-&gt;Right = Insert( T-&gt;Right, X );
+        /* 如果需要右旋 */
+        if ( GetHeight(T-&gt;Left)-GetHeight(T-&gt;Right) == -2 )
+            if ( X &gt; T-&gt;Right-&gt;Data ) 
+                T = SingleRightRotation(T);     /* 右单旋 */
+            else 
+                T = DoubleRightLeftRotation(T); /* 右-左双旋 */
+    } /* else if (插入右子树) 结束 */
+
+    /* else X == T-&gt;Data，无须插入 */
+
+    /* 别忘了更新树高 */
+    T-&gt;Height = Max( GetHeight(T-&gt;Left), GetHeight(T-&gt;Right) ) + 1;
+
+    return T;
+}
+
+int main()//对四种旋转进行测试。
+{
+    Position A=(Position)malloc(sizeof(struct AVLNode));
+    A-&gt;Height=0;
+    A-&gt;Data=9;
+    A-&gt;Left=NULL;
+    A-&gt;Right=NULL;
+    A=Insert(A,4);
+    A=Insert(A,3);//右单旋
+    printf(&quot;%d &quot;,A-&gt;Left-&gt;Data);
+    printf(&quot;%d &quot;,A-&gt;Right-&gt;Data);
+    printf( &quot;\n&quot; );
+    A=Insert(A,11);
+    A=Insert(A,19);//左单旋
+    printf(&quot;%d &quot;,A-&gt;Left-&gt;Data);
+    printf(&quot;%d &quot;,A-&gt;Right-&gt;Data);
+    printf( &quot;\n&quot; );
+    A=Insert(A,10);//右左双旋
+    printf(&quot;%d &quot;,A-&gt;Left-&gt;Data);
+    printf(&quot;%d &quot;,A-&gt;Right-&gt;Data);
+    printf( &quot;\n&quot; );
+    A=Insert(A,12);
+    A=Insert(A,17);//左右双旋
+    printf(&quot;%d &quot;,A-&gt;Right-&gt;Left-&gt;Data);
+    printf(&quot;%d &quot;,A-&gt;Right-&gt;Right-&gt;Data);
+    system(&quot;pause&quot;);
+    return 0;
+}
+</code></pre><p>运行结果如下图所示：<br><img src="/2019/07/04/7月学习数据结构（树）/14.png" alt=""></p>
+<p>还有红黑树等待补充。。。。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/7月学习数据结构（链表）/" rel="next" title="链表添加函数中为什么要用指向链表指针的指针">
+                <i class="fa fa-chevron-left"></i> 链表添加函数中为什么要用指向链表指针的指针
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="小霸王孙无月">
+            
+              <p class="site-author-name" itemprop="name">小霸王孙无月</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ayesawyer.github.io/" title="隔壁xxx的小屋" target="_blank">隔壁xxx的小屋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小霸王孙无月</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客数
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-unitychan"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
