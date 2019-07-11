@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="堆和哈夫曼编码">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆和哈夫曼的学习">
+<meta property="og:url" content="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/index.html">
+<meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="堆和哈夫曼编码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/3.png">
+<meta property="og:updated_time" content="2019-07-08T07:15:24.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="堆和哈夫曼的学习">
+<meta name="twitter:description" content="堆和哈夫曼编码">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/">
+
+
+
+
+
+  <title>堆和哈夫曼的学习 | 秉忠贞之诚,守退让之实</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秉忠贞之诚,守退让之实</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/7月学习数据结构（堆和哈夫曼）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">堆和哈夫曼的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-06T15:38:48+08:00">
+                2019-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构学习/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>堆和哈夫曼编码<br><a id="more"></a><br>什么是堆？<br>堆是为了处理一种特殊的情况而建立的一种特殊的队列，取出的元素的顺序是按照元素的优先权的大小，而不是依照元素进入队列的先后顺序。<br>那如何组织这种形式呢？依靠顺序存储或者链表都有各种不尽人意的地方，平均损耗如下所示：<br><img src="/2019/07/06/7月学习数据结构（堆和哈夫曼）/1.png" alt=""><br>所以我们采用完全二叉树来进行存储，这样插入和删除都是O（log（n）），而且是完全二叉树，所以并不会照成空间上太多的浪费。<br>堆的两个特性：<br>（1）结构性：用数组表示的完全二叉树<br>（2）有序性：任意节点的关键字是其所有子树所有节点的最大值或者最小值，相应的就称为最大堆或者最小堆，也称大顶堆或者小顶堆。<br>堆关注的三个问题，一个是删除，一个是插入，一个是堆的建立。<br>一、堆的删除（以最大堆举例）<br>取出根节点元素，同时删除堆中的根节点，为了保证最大堆的性质，我们需要将其进行改造，如果从下方选择一个子树节点值上移，会造成许多麻烦的操作，所以我们选择将存储数组的最后一个节点（即最后一个入队的元素放在根节点的位置），然后不断的进行比较，将其放在其应该处于的位置。<br>二、最大堆的插入<br>将新插入的节点放在存储数组最后的位置，然后我们不断的将其与其父节点进行比较，如果大于就上移，否则就留着原位，并且插入结束。<br>三、最大堆的建立<br>将已经存在的N哥元素按照最大堆的要求存放在一个一维数组中，我们有两种方法。<br>（1）通过插入操作，一个个相继插入到初始为空的堆中去，其时间代价在最大的情况下为O（NlogN）。<br>（2）我们可以在线性复杂度下建立最大堆。<br>    2.1 将N个元素按照输入顺序直接存入，先满足完全二叉树的结构特性<br>    2.2 调整各节点的位置，以满足最大堆的有序特性，采用自底向上的调整方式，从最后一个具有孩子节点的节点开始，往前开始调整，确保调整过的每一个节点的子树都是最大堆，它是树中各路径的高度和，时间复杂度计算如下所示：<br><img src="/2019/07/06/7月学习数据结构（堆和哈夫曼）/2.png" alt=""><br>单纯的从代码和图示来看，也是O（nlogn）,但是我们说过了，这是一个自底向上的过程，所以它就变成了O（n）。<br>N个节点的完全二叉树最多存在log2(n+1)层(向下取整)，我们设为h，在树的第j层最多有2e(j-1)个节点，每一层可能向下交换的次数为层数减一，所以根节点最多交换次数为层数减一。这样每一个的节点最多比较的次数就是h-j,其中j是自己的层数，h是总的层数，那倒数第二层的节点的比较次数就是1<em>2^(h-1)次(与左右孩子分别比较，所以乘上了2)，由于是bottom-top建立堆，因此在调整上层元素的时候，并不需要同下层所有元素做比较，只需要同其中之一分支作比较，而作比较次数则是树的高度减去当前节点的高度。因此，第x层元素的计算量为2^(x) </em> (h-x)，又以上通项公式可得知，构造树高为h的二叉堆的精确时间复杂度为：<br>S = 2^(h-1) × 1 + 2^(h-2) × 2 + …… +1 × (h-1) ①<br>通过观察上述公式可知，该求和公式为等差数列和等比数列的乘积，因此用错位想减发求解，给公式左右两侧同时乘以2，可知：<br>2S = 2^h × 1 + 2^(h-1) × 2+ …… +2 × (h-1) ②<br>用②减去①可得： S =2^h+2^(h-1)+……- h +1 ③<br>将h = ㏒n 带入③，得出如下结论：<br>S =2n-log(n+1)+1= O(n)<br>上述操作的代码如下：</p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+typedef int ElementType;
+typedef struct HNode *Heap; /* 堆的类型定义 */
+#define BOOL int
+#define true 1
+#define false 0
+struct HNode {
+    ElementType *Data; /* 存储元素的数组 */
+    int Size;          /* 堆中当前元素个数 */
+    int Capacity;      /* 堆的最大容量 */
+};
+typedef Heap MaxHeap; /* 最大堆 */
+typedef Heap MinHeap; /* 最小堆 */
+
+#define MAXDATA 1000  /* 该值应根据具体情况定义为大于堆中所有可能元素的值 */
+
+MaxHeap CreateHeap( int MaxSize )
+{ /* 创建容量为MaxSize的空的最大堆 */
+
+    MaxHeap H = (MaxHeap)malloc(sizeof(struct HNode));
+    H-&gt;Data = (ElementType *)malloc((MaxSize+1)*sizeof(ElementType));
+    H-&gt;Size = 0;
+    H-&gt;Capacity = MaxSize;
+    H-&gt;Data[0] = MAXDATA; /* 定义&quot;哨兵&quot;为大于堆中所有可能元素的值*/
+
+    return H;
+}
+
+int IsFull( MaxHeap H )
+{   
+    if(H-&gt;Size == H-&gt;Capacity)
+        return 1;
+    return 0;
+}
+int Insert( MaxHeap H, ElementType X )
+{ /* 将元素X插入最大堆H，其中H-&gt;Data[0]已经定义为哨兵 */
+    int i;
+
+    if ( IsFull(H) ) { 
+        printf(&quot;最大堆已满&quot;);
+        return 0;
+    }
+    i = ++H-&gt;Size; /* i指向插入后堆中的最后一个元素的位置 */
+    for ( ; H-&gt;Data[i/2] &lt; X; i/=2 )
+        H-&gt;Data[i] = H-&gt;Data[i/2]; /* 上滤X */
+    H-&gt;Data[i] = X; /* 将X插入 */
+    return 1;
+}
+#define ERROR -1 /* 错误标识应根据具体情况定义为堆中不可能出现的元素值 */
+
+int IsEmpty( MaxHeap H )
+{
+    if(H-&gt;Size==0)
+        return true;
+    return false;
+}
+
+ElementType DeleteMax( MaxHeap H )
+{ /* 从最大堆H中取出键值为最大的元素，并删除一个结点 */
+    int Parent, Child;
+    ElementType MaxItem, X;
+
+    if ( IsEmpty(H) ) {
+        printf(&quot;最大堆已为空&quot;);
+        return ERROR;
+    }
+
+    MaxItem = H-&gt;Data[1]; /* 取出根结点存放的最大值 */
+    /* 用最大堆中最后一个元素从根结点开始向上过滤下层结点 */
+    X = H-&gt;Data[H-&gt;Size--]; /* 注意当前堆的规模要减小 */
+    for( Parent=1; Parent*2&lt;=H-&gt;Size; Parent=Child ) {
+        Child = Parent * 2;
+        if( (Child!=H-&gt;Size) &amp;&amp; (H-&gt;Data[Child]&lt;H-&gt;Data[Child+1]) )
+            Child++;  /* Child指向左右子结点的较大者 */
+        if( X &gt;= H-&gt;Data[Child] ) break; /* 找到了合适位置 */
+        else  /* 下滤X */
+            H-&gt;Data[Parent] = H-&gt;Data[Child];
+    }
+    H-&gt;Data[Parent] = X;
+
+    return MaxItem;
+} 
+
+/*----------- 建造最大堆 -----------*/
+void PercDown( MaxHeap H, int p )
+{ /* 下滤：将H中以H-&gt;Data[p]为根的子堆调整为最大堆 */
+    int Parent, Child;
+    ElementType X;
+    X = H-&gt;Data[p]; /* 取出根结点存放的值 */
+    for( Parent=p; Parent*2&lt;=H-&gt;Size; Parent=Child ) {
+        Child = Parent * 2;
+        if( (Child!=H-&gt;Size) &amp;&amp; (H-&gt;Data[Child]&lt;H-&gt;Data[Child+1]) )
+            Child++;  /* Child指向左右子结点的较大者 */
+        if( X &gt;= H-&gt;Data[Child] ) break; /* 找到了合适位置 */
+        else  /* 下滤X */
+            H-&gt;Data[Parent] = H-&gt;Data[Child];
+    }
+    H-&gt;Data[Parent] = X;
+}
+
+void BuildHeap( MaxHeap H )
+{ /* 调整H-&gt;Data[]中的元素，使满足最大堆的有序性  */
+  /* 这里假设所有H-&gt;Size个元素已经存在H-&gt;Data[]中 */
+
+    int i;
+    /* 从最后一个结点的父节点开始，到根结点1 */
+    for( i = H-&gt;Size/2; i&gt;0; i-- )
+        PercDown( H, i );
+}
+void Show(MaxHeap p) 
+{
+    int len=p-&gt;Size;
+    for(int i=1;i&lt;=len;i++)
+        printf(&quot;%d &quot;,p-&gt;Data[i]);
+    printf(&quot;\n&quot;);
+}
+void main()
+{
+    MaxHeap p=CreateHeap(20);
+    Insert(p,44);
+    Insert(p,33);
+    Insert(p,7);
+    Insert(p,6);
+    Insert(p,99);
+    Insert(p,12);
+    Insert(p,999);
+    Insert(p,54);
+    Insert(p,34);
+    Insert(p,15);
+    Show(p);
+    DeleteMax( p);
+    DeleteMax( p);
+    Show(p);
+    printf(&quot;\n&quot;);
+
+    MaxHeap p1= CreateHeap(15);
+    int a[]={55,79,66,83,72,30,49,91,87,43,9,38};
+    int len=sizeof(a)/sizeof(int);
+    p1-&gt;Size=len;
+    for(int i=0;i&lt;len;i++)
+        p1-&gt;Data[i+1]=a[i];
+    Show(p1);
+    BuildHeap(p1);
+    Show(p1);
+    system(&quot;pause&quot;);
+
+
+}
+</code></pre><p>运行结果：<br><img src="/2019/07/06/7月学习数据结构（堆和哈夫曼）/3.png" alt=""><br>抓紧学，在这么下去找工作前搞不定的。。。<br>什么是哈夫曼编码以及哈夫曼树？<br>我们在对数据进行查找或者编码的时候，如果不考虑数据出现的频率，单纯的将每一个数据看成等概率的操作，就会造成资源的浪费，哈夫曼树就是为了解决这个问题的。<br>哈夫曼树的定义：<br>带权路径长度(WPL)：设二叉树有n个叶子结点，每个叶子结点带有权值 w，从根结点到每个叶子结点的长度为 l，则每个叶子结<br>点的带权路径长度之和就是：WPL=w*l(从第一个节点到第n个节点)<br>最优二叉树或哈夫曼树: WPL最小的二叉树<br>哈夫曼树的构造就是每次把权值最小的两棵二叉树进行合并。<br>我们依托最小堆进行实现，代码如下：</p>
+<pre><code>typedef struct TreeNode *HuffmanTree;
+    struct TreeNode{
+    int Weight;
+    HuffmanTree Left, Right;
+}
+HuffmanTree Huffman( MinHeap H )
+{ /* 假设H-&gt;Size个权值已经存在H-&gt;Elements[]-&gt;Weight里 */
+     int i; HuffmanTree T;
+     BuildMinHeap(H); /*将H-&gt;Elements[]按权值调整为最小堆*/
+     for (i = 1; i &lt; H-&gt;Size; i++)
+     {     /*做H-&gt;Size-1次合并*/
+         T = malloc( sizeof( struct TreeNode) ); /*建立新结点*/
+         T-&gt;Left = DeleteMin(H);
+         /*从最小堆中删除一个结点，作为新T的左子结点*/
+         T-&gt;Right = DeleteMin(H);
+         /*从最小堆中删除一个结点，作为新T的右子结点*/
+         T-&gt;Weight = T-&gt;Left-&gt;Weight+T-&gt;Right-&gt;Weight;
+         /*计算新权值*/
+         Insert( H, T ); /*将新T插入最小堆*/
+     }
+     T = DeleteMin(H);
+     return T;
+ }
+</code></pre><p>整体复杂度为O（NlogN）.<br>哈夫曼树的特点：<br>（1）没有度为1的节点<br>（2）n个叶子节点的哈夫曼树共有2n-1个节点<br>（3）哈夫曼树的任意非叶子节点的左右子树交换后扔是哈夫曼树<br>（4）对同一权值的一组数据，存在不同构的两棵哈夫曼树<br>像哈夫曼编码这种不等长编码，最重要的就是避免二义性，必须任意字符的编码都不是另一个字符编码的前缀，如此才可以无二义的解码，根据这一特点，我们利用二叉树进行编码，遵循下列两个条件：<br>（1）左右分支分别为0，1.<br>（2）字符只在叶子节点上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/7月学习数据结构（树）/" rel="next" title="数据结构树的学习（未完待续）">
+                <i class="fa fa-chevron-left"></i> 数据结构树的学习（未完待续）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/09/7月学习数据结构（集合与图）/" rel="prev" title="集合与图的学习">
+                集合与图的学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="小霸王孙无月">
+            
+              <p class="site-author-name" itemprop="name">小霸王孙无月</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ayesawyer.github.io/" title="隔壁xxx的小屋" target="_blank">隔壁xxx的小屋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小霸王孙无月</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客数
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-unitychan"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -82,7 +82,7 @@
 <meta name="description" content="二叉搜索树、二叉平衡树">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构树的学习">
+<meta property="og:title" content="数据结构树的学习（未完待续）">
 <meta property="og:url" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
 <meta property="og:description" content="二叉搜索树、二叉平衡树">
@@ -101,9 +101,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/12.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/13.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/14.png">
-<meta property="og:updated_time" content="2019-07-06T05:26:26.191Z">
+<meta property="og:updated_time" content="2019-07-09T13:23:56.010Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构树的学习">
+<meta name="twitter:title" content="数据结构树的学习（未完待续）">
 <meta name="twitter:description" content="二叉搜索树、二叉平衡树">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/04/7月学习数据结构（树）/1.png">
 
@@ -141,7 +141,7 @@
 
 
 
-  <title>数据结构树的学习 | 秉忠贞之诚,守退让之实</title>
+  <title>数据结构树的学习（未完待续） | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -295,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构树的学习</h1>
+          <h1 class="post-title" itemprop="name headline">数据结构树的学习（未完待续）</h1>
         
 
         <div class="post-meta">
@@ -787,7 +787,19 @@ int main()//对四种旋转进行测试。
     return 0;
 }
 </code></pre><p>运行结果如下图所示：<br><img src="/2019/07/04/7月学习数据结构（树）/14.png" alt=""></p>
-<p>还有红黑树等待补充。。。。。。</p>
+<p>之前提到了，如何通过先序遍历和中序遍历找出一个树的后序遍历，代码如下：</p>
+<pre><code>void solve( int preL, int inL, int postL, int n )
+{   if (n==0) return;
+    if (n==1) {post[postL] = pre[preL]; return;}
+    root = pre[preL];
+    post[postL+n-1] = root;
+    for (i=0; i&lt;n; i++)
+    if (in[inL+i] == root) break;
+    L = i; R = n-L-1;
+    solve(preL+1, inL, postL, L);
+    solve(preL+L+1, inL+L+1, postL+L, R);
+}
+</code></pre><p>还有红黑树等待补充。。。。。。</p>
 
       
     </div>
@@ -827,6 +839,10 @@ int main()//对四种旋转进行测试。
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/06/7月学习数据结构（堆和哈夫曼）/" rel="prev" title="堆和哈夫曼的学习">
+                堆和哈夫曼的学习 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -896,7 +912,7 @@ int main()//对四种旋转进行测试。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
