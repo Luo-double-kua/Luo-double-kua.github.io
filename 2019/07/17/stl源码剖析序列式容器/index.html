@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一些常用的序列式容器：vector、list、deque、stack、queue、heap、priority_queue、slist。">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stl源码剖析序列式容器">
+<meta property="og:url" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/index.html">
+<meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="一些常用的序列式容器：vector、list、deque、stack、queue、heap、priority_queue、slist。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/6.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/7.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/8.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/9.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/10.png">
+<meta property="og:updated_time" content="2019-07-19T03:38:51.595Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="stl源码剖析序列式容器">
+<meta name="twitter:description" content="一些常用的序列式容器：vector、list、deque、stack、queue、heap、priority_queue、slist。">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/">
+
+
+
+
+
+  <title>stl源码剖析序列式容器 | 秉忠贞之诚,守退让之实</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秉忠贞之诚,守退让之实</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/17/stl源码剖析序列式容器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">stl源码剖析序列式容器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T11:40:55+08:00">
+                2019-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/stl源码剖析/" itemprop="url" rel="index">
+                    <span itemprop="name">stl源码剖析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一些常用的序列式容器：vector、list、deque、stack、queue、heap、priority_queue、slist。<br><a id="more"></a><br>首先介绍下容器的概念，容器是将一些运用最广的数据结构实现出来，并且根据数据在容器中的排列特性，这些数据结构分为序列式容器以及关联式容器两种。其中序列式容器包括array（c++自建）、vector、heap、priority_queue（由heap演变）、list、slist、deque、stack和queue（由deque演变），关联式容器包括RB-tree、set和map和multiset和multimap（由RB-tree演变）、hashtable、hash_set和hash—map和hash-multiset和hash-multimap（由hashtable演变）。<br>1、序列式容器<br>  序列式容器中的元素都是可序的，但是未必有序，其中stack和queue只是将deque的接口修改了，技术上被归类为一种配接器（adapter）。<br>2、vector<br>vector各个方面和数组array都十分类似，惟一的区别是空间的运用的灵活性，array是一个固定了大小的静态空间，一旦配置之后就不能修改了，然后vector是一个动态的空间，随着新元素的加入，它的内部会自行扩充，vector的扩充也是一个配置新空间、数据移动、释放旧空间的大工程。<br>vector定义的源码如下所示：</p>
+<pre><code>template&lt;class T,class Alloc=alloc&gt;
+class vector
+{
+    public:
+        typedef T value_type;
+        typedef value_type* potinter;
+        typedef value_type* iterator;//普通指针
+        typedef value_type&amp; reference;
+        typedef size_t size_type;
+        typedef ptrdiff_t difference_type;
+    protected:
+        typedef simple_alloc&lt;value_type,Alloc&gt;data_allocator;
+        iterator start;
+        iterator finish;
+        iterator end_of_storage;
+        void insert_aux(iterator position ,const T&amp; x);//在position位置前插入x。
+        void deallocate(){
+            if(start)
+               data_allocator::deallocate(start,end_of_storage-start);这是一个释放内存函数，deallocate，相对于allocator的申请空间
+        }
+        void fill_initialize(size_type n,const T&amp; value)
+        {
+            start=allocate_and_fill(n,value);
+            finish=start+n;
+            end_of_storage=finish;
+            //这是一个填充函数，将我们申请的vector的长度为n的空间全部用value进行赋值。
+        }
+        public：
+        iteration begin(){return start;}
+        iteration end(){return finish;}
+        size_type size()const{return size_type(end()-begin());}
+        size_type capacity()const{return size_type(end_of_storage-begin());}
+        bool empty()const{return begin()==end();}
+        reference operator[] (size_type n){return *(begin()+n);}//返回从begin开始后的第n个元素的引用，这确保了可以赋值成功。
+        vector():start(0),finish(0),end_of_storage(0){}
+        vector(size_type n,const T&amp; vlaue){fill_initialize(n,value);}
+        vector(int n,const T&amp; vlaue){fill_initialize(n,value);}
+        vector(long n,const T&amp; vlaue){fill_initialize(n,value);}
+        explicit vector(size_type n){fill_initialize(n,T());}//声明为explicit的构造函数不能在隐式转换中使用，T()相当于一个调用默认初始化的构造函数，它的初始化的缺省值为0
+        ~vector(){
+        destroy(start,finish);//这是个全局函数，是一个析构函数，负责调用类型的析构函数，销毁相应内存上的内容（但销毁后内存地址仍保留）
+        deallocate();//负责释放内存（此时相应内存中的值在此之前应调用destory销毁，将内存地址返回给系统，代表这部分地址使用引用-1）
+        }
+        reference front(){return *begin();}
+        reference back(){return *(end()-1);}
+        void push_back(const T&amp; x)
+        {
+            if(finish!=end_of_storage)
+            {
+                construct(finish,x);//全局函数，用于将指定指针位置的内容置为x
+                ++finish;
+            }
+            else 
+               insert_aux(end(),x);//没有备用空间，扩充空间（重新配置，移动数据，释放原空间）
+        }
+        void pop_back()
+        {
+            --finish;
+            destroy(finish);//销毁内容
+        }
+        iterator erase(iterator position)
+        {
+            if(position+1!=end())
+               copy(position+1,finish,position);
+            --finish;//如果加一等于end，说明指向的最后一个元素，和pop_back是一样的，如果没有指向最后一个，那么就挨个向前复制。
+            destroy(finish);
+            return position;
+        }
+        void resize(size_type new_size,const T&amp; x)
+        {
+            if(new_size&lt;size())
+               erase(begin()+new_size,end());//销毁多出来的元素，但是可用长度并没有改变。
+            else
+              insert(end(),new_size-size(),x);//如果过短，那么在最后再插入缺少的个数个x；
+        }
+   protected:
+        iterator allocate_and_fill(size_type n,const T&amp; x)
+        {
+            iterator result=data_allocator::allocate(n);//配置n个元素空间
+            uninitialized_fill_n(result,n,x);//全局函数，将范围内指向的所有的未初始化的内存空间赋值x。
+            return result; 
+        }
+}
+</code></pre><p>因为vector是一个连续的线性空间，所以它的迭代器只要普通指针就可以满足了，并且普通指针也支持随机存取，所以vector提供的是一个random access iterators。它的数据机构很简单，以两个迭代器start以及finish分别指向配置得来的连续空间中目前被使用的范围，以end_of_storage代表整块连续空间的尾端。为了降低空间配置的速度成本，一般情况下实际配置大小会比需求更大一些，这就是capacity的概念，下面这张图可以很好的解释上面这段话：<br><img src="/2019/07/17/stl源码剖析序列式容器/1.png" alt=""><br>配置空间的程序为：</p>
+<pre><code>template&lt;calss T,class Alloc&gt;
+void vector&lt;T,Alloc&gt;::insert_aux(iterator position,const T&amp; x)
+{
+    if(finish!=end_of_storage)
+   //还有备用空间，在备用空间起始处构造元素，并将最后一个元素值设为其初值。
+        construct(finish,*(finish-1));
+    ++finish;
+   //调整finish的位置。
+    T x_copy=x;
+  //copy_backward是从后往前赋值，具体见下附图，这样刚好能够不覆盖掉元素。
+    copy_backward(position,finsh-2,finish-1);
+  //将插入值赋给指针位置position。
+    *position =x_copy;
+}
+else//无备用空间
+{
+    const size_type old_size=size();//取出原来的大小
+    const size_type len=old_size!=0?2*old_size:1;
+    //原来大小为0，就配置一个元素空间，否则就是配置原来大小的两倍空间，前半段用来放置原来的数据，后半段放新数据。
+    iterator new_start=data_allocator::allocate(len);//配置空间。
+    iterator new_finish=new_start;//内部暂无元素
+    try{
+        new_finish=uninitialized_copy(start,position,new_start);//将start到position位置的元素全部复制到新地址
+        construct(new_finish,x);//将待插入的值放入最后可以备用空间
+        ++new_finish;//调整位置
+        new_finish=uninitialized_copy(position,finish,new_finish);//将之前未复制完的后半段元素复制过来。
+    }
+    catch(.....){
+        destroy(new_start,new_finish);//上述操作失败，那么析构掉已经复制元素的内存空间
+        data_allocator::deallocate(new_start,len);//释放掉内存空间
+        throw;
+    }
+    destroy(begin(),end())；//析构并释放原来的vector。
+    deallocate();
+    start=new_start;//调整start和finish和end_of_storage，使它们指向新的vector。
+    finish=new_finish;
+    end_of_storage=new_start+len;
+}
+}
+</code></pre><p><img src="/2019/07/17/stl源码剖析序列式容器/2.png" alt=""><br>注意一点，动态增加大小，从上述代码可以看出，并不是在原来的空间之后接上新的空间，而是要经过配置，复制，释放三个操作，因此，对vector的任何操作，一旦引起来空间重新配置，之前的指向原vector的迭代器就失效了，vector里面的函数包括void pop_back()、iterator erase(iterator first,iterator last)、iterator erase(iterator position)、void insert(iterator position ,size_type n,const T&amp;x),挑选其中的几个进行复习。</p>
+<pre><code>iterator erase(iterator first,iterator last)
+{
+    iterator i=copy(last,finish,first);//全局函数,复制从last到finish的元素到从first开始的内存空间中，从前往后复制后，返回最后一个地址。
+    destroy(i,finish);
+    finish=finish-(last-first);
+    return first;
+}
+iterator erase(iterator position)
+{
+    if(position+1!=end())//看是否是清除最后一个元素
+        copy(position+1,finish,position)
+    --finish;
+    destroy(finish);
+    return position;
+}
+void clear(){erase(begin(),end());}
+void insert(iterator position, const T&amp; value){
+        insert(position, 1, value);
+    }
+//在position位置之后，插入n个值为value的元素
+void insert(iterator position, size_type n, const T&amp; value){
+    if (n == 0)return;
+    if ((end_of_storage - finish) &gt;= n){//备用空间够插入n个新元素
+        T x_copy = value;
+        const  size_type size_from_position_to_end = finish - position;//计算从最后一个位置到要插入位置的元素个数
+        iterator old_finish = finish;
+        if (size_from_position_to_end &gt; n)//如果插入元素个数小于插入位置之后的元素个数{
+            uninitialized__copy(finish - n, finish, finish);//这是一个用于未初始化空间的复制函数，将倒数的n个元素往未初始化过的内存空间移动
+            finish += n;//改变finish的值
+            copy_backward(position, old_finish - n, old_finish);从后往前，将剩下的size_from_position_to_end-n个元素从之前的finish那个位置往前复制
+            fill(position, position + n, x_copy);//填入新的值
+        }
+        else{//插入点之后元素个数小于新增元素个数
+            uninitialized_fill_n(finish, n - size_from_position_to_end, x_copy);//先用x将finish之后的n-size_from_position_to_end个备用空间赋值。
+            finish += n - size_from_position_to_end;更改finish的值
+            uninitialized_copy(position, old_finish, finish);一个插入n个值，再将这剩下的size_from_position_to_end个之前的元素赋值到finish之后。
+            finish += size_from_position_to_end;修改finish
+            fill(position, old_finish, x_copy);用x将已经移动到最后的size_from_position_to_end个元素的空间赋值。
+        }
+    }
+    else{
+        //重新申请空间，并且决定新长度为旧长度的两倍或者说旧长度+新增元素个数。
+        const size_type old_size = size();
+        const size_type len=old_size+max(old_size,n);
+        iterator new_start = data_allocator::allocate(len);
+        iterator new_finish = new_start;
+        //内存的分配要有原子性，即:要么全部成功，要么全部失败。
+        try{
+            new_finish = uninitialized_copy(begin(), position, new_start);//1.将原内容至position的所有元素(不包含position) 拷贝到新的vector
+            new_finish = uninitialized_fill_n(new_finish, n, value);//2.将position位置到后面的n个元素都填充为value
+            new_finish = uninitialized_copy(position, end(), new_finish);//3.拷贝从 position位置到end()位置的原vector的所有剩余元素
+        }
+        catch (...)//如果失败了
+        {
+            destroy(new_start, new_finish);
+            data_allocator::deallocate(new_start,len);(等同于free(new_start);)//删除申请到的内存
+
+            throw;        //抛出异常
+        }
+        //析构并释放原vector
+        destroy(begin(), end());
+        //删除内存
+        deallocate();
+        //调整迭代器，指向新的vector
+        start = new_start;
+        finish = new_finish;
+        end_of_storage = new_start + len;
+    }
+}
+</code></pre><p>上述代码的操作可以用接下来的几幅图进行一个很直观的展示：<br><img src="/2019/07/17/stl源码剖析序列式容器/3.png" alt=""><br><img src="/2019/07/17/stl源码剖析序列式容器/4.png" alt=""><br><img src="/2019/07/17/stl源码剖析序列式容器/5.png" alt=""><br>2、list<br>相比较于上面说到的vector，list就复杂很多，但是它每次插入或者删除一个元素，就配置或者释放一个元素空间。因此，list对于空间的运用有绝对的精准，对于任何位置的插入或删除，list都是常数时间。这两个是最常用的容器，一般是由元素的多少，元素的构造复杂度，元素的存取行为特性等决定使用哪一种容器的。<br>对于list来说，list本身和list的节点是两种不同的结构，需要对它进行分开设计，其中list的节点结构如下所示：</p>
+<pre><code>template&lt;calss T&gt;
+struct _list_node{
+    typedef void* void_pointer;
+    void_pointer prev;//类型为void*，其实可以弄成_lsit_node&lt;T&gt;*.
+    void_pointer next;
+    T data;
+}
+</code></pre><p>结构如图：<br><img src="/2019/07/17/stl源码剖析序列式容器/6.png" alt=""><br>一个很明显的双向链表，容器中一个很重要的东西就是迭代器，并且很明显，不能再用普通指针作为迭代器了，因为list并不是在存储空间中连续存在的。list的迭代器要成功实现递增、递减、取值、成员存取等操作。所以list应该提供的是bidirectional iterators（双向迭代器）。list和vector不同的一个重要性质，无论是结合操作（splice）或是插入操作（insert）都不会造成原有的list迭代器失效，删除操作也只是让指向被删除的那个元素的迭代器失效，其它迭代器不受影响。</p>
+<p>看一看迭代器的设计：</p>
+<pre><code>// 至于为什么不使用默认参数, 这个是因为有一些编译器不能提供推导能力,
+// 而作者又不想维护两份代码, 故不使用默认参数
+template&lt;class T,class Ref,class Ptr&gt;
+struct _list_iterator{
+    // 定义相应型别
+     typedef _list_iterator&lt;T,T&amp;,T*&gt; iterator;
+     typedef _list_iterator&lt;T,Ref,Ptr&gt; self;
+     typedef bidirectional_iterator_tag iterator_category;
+     typedef T value_type;
+     typedef Ptr pointer;
+     typedef Ref reference;
+     typedef _list_node&lt;T&gt;* link_type;
+     typedef size_t size_type;
+     typedef ptrdiff_t difference_type;
+    // 拥有一个指向对应结点的指针,一个普通指针，指向list节点。
+    link_type node;
+    // 构造函数
+    __list_iterator() {}
+    __list_iterator(link_type x) : node(x) {}
+    __list_iterator(const iterator&amp; x) : node(x.node) {}    
+    // 在STL算法中需要迭代器提供支持
+    bool operator==(const self&amp; x) const { return node == x.node; }
+    bool operator!=(const self&amp; x) const { return node != x.node; }
+    // 重载了iterator必须的操作符，对迭代器取值，取的是节点的数据值
+    reference operator*() const { return (*node).data; }
+    //对迭代器的成员存取（member access）运算子的标准做法
+    pointer operator-&gt;() const { return &amp;(operator*()); }
+    // 前缀自加，对迭代器累加1，就是前进一个节点，为了区分前后，用++()表示前自增，用++(int)后自增，传入一个0；
+    self&amp; operator++()
+    {
+        node = (link_type)((*node).next);
+        return *this;
+    }
+
+    // 后缀自加, 需要先产生自身的一个副本, 然会再对自身操作, 最后返回副本，插一句话，一般使用前自增，这样函数开销比较小。后自增还需要一个临时副本存储元素，以便操作结束之后进行加一操作。
+    self operator++(int)
+    {
+        self tmp = *this;
+        ++*this;//运用了前缀自加。
+        return tmp;
+    }
+    // 前缀自减，后退一个节点。
+    self&amp; operator--()
+    {
+        node = (link_type)((*node).prev);
+        return *this;
+    }
+
+    self operator--(int)
+    {
+        self tmp = *this;
+        --*this;
+        return tmp;//返回的是未做处理前的节点，符合后缀操作先操作，后运行的道理，这也是为何开销会大，生成了一个复制副本。
+    }
+};
+</code></pre><p>接下来说一说list的数据结构，并且list还是一个环状的双向链表，所以只需要一个指针，便可以通过遍历的方式完整的表现出整个数组。</p>
+<pre><code>template &lt;class T, class Alloc = alloc&gt;  
+class list  
+{  
+protected:  
+ typedef __list_node&lt;T&gt; list_node;
+public：
+typedef list_node* link_type;
+protected:
+link_type node;
+......
+}
+</code></pre><p>为了满足vector中的很多函数，所以将node刻意的指向尾端的一个空白节点，这样就实现了前闭后开的区间要求。这样下面的这些函数都能很好的完成。<br><img src="/2019/07/17/stl源码剖析序列式容器/7.png" alt=""><br>下面这些函数里面不仅有list的内存管理和构造，还有它的元素操作，</p>
+<pre><code>iterator begin(){return (link_type)((*node).next);}
+iterator end(){return node;}
+bool empty()const{return node-&gt;next==node;}
+size_type size()const{
+size_type result=0;
+distance(begin(),end(),result);//全局函数,用于计算两个迭代器之间的距离，针对不同迭代器计算方式不同。
+return result;
+}
+//取头尾节点的值
+reference front(){return *begin();}
+reference back(){return *(--end());}
+
+// 默认allocator为alloc, 其具体使用版本请参照&lt;stl_alloc.h&gt;  
+template &lt;class T, class Alloc = alloc&gt;  
+class list  
+{  
+protected:  
+    typedef void* void_pointer;  
+    typedef __list_node&lt;T&gt; list_node;  
+
+    // 专属之空间配置器，每次配置一个节点大小，list_node_allocator（n）表示配置n个节点空间 
+    typedef simple_alloc&lt;list_node, Alloc&gt; list_node_allocator;  
+
+public:  
+    typedef T value_type;  
+    typedef value_type* pointer;  
+    typedef value_type&amp; reference;  
+    typedef list_node* link_type;  
+    typedef size_t size_type;  
+    typedef ptrdiff_t difference_type;  
+
+    typedef __list_iterator&lt;T, T&amp;, T*&gt;             iterator;  
+
+protected:  
+    link_type node ;     // 只要一个指针，便可表示整个环状双向链表  
+    // 分配一个新结点, 注意这里并不进行构造,  
+    // 构造交给全局的construct, 见&lt;stl_stl_uninitialized.h&gt; ，配置一个节点内存空间并传回。 
+    link_type get_node() { return list_node_allocator::allocate(); }  
+
+    // 释放指定结点, 不进行析构, 析构交给全局的destroy，这里直接进行内存释放了。  
+    void put_node(link_type p) { list_node_allocator::deallocate(p); }  
+
+    // 产生（配置并构造）一个节点, 首先分配内存, 然后进行构造  
+    // 注: commit or rollback 提交或者回滚，就是成功或者释放所有申请的。  
+    link_type create_node(const T&amp; x)  
+    {  
+        link_type p = get_node();  
+        construct(&amp;p-&gt;data, x); //全局函数，老函数了 
+        return p;  
+    }  
+
+    // 析构结点元素, 并释放内存  
+    void destroy_node(link_type p)  
+    {  
+        destroy(&amp;p-&gt;data);//全局函数  
+        put_node(p);  
+    }  
+
+protected:  
+    // 用于空链表的建立  
+    void empty_initialize()  
+    {  
+        node = get_node();   // 配置一个节点空间，令node指向它，显然为设定初值。  
+        node-&gt;next = node;   // 令node头尾都指向自己，不设元素值  
+        node-&gt;prev = node;  
+    }  
+  // 创建值为value共n个结点的链表  
+  // 注: commit or rollback  
+    void fill_initialize(size_type n, const T&amp; value)  
+    {  
+        empty_initialize();  
+        __STL_TRY  
+        {  
+            // 此处插入操作时间复杂度O(1)  
+            insert(begin(), n, value);  
+        }  
+        __STL_UNWIND(clear(); put_node(node));  
+    }  
+
+
+public:  
+    list() { empty_initialize(); }//产生一个空链表，list包含很多constructors，这是个default constructor（默认构造函数）。  
+    iterator begin() { return (link_type)((*node).next); }  
+
+    // 链表成环, 当指所以头节点也就是end  
+    iterator end() { return node; }  
+
+    // 头结点指向自身说明链表中无元素  
+    bool empty() const { return node-&gt;next == node; }  
+
+    // 使用全局函数distance()进行计算, 时间复杂度O(n)  
+    size_type size() const  
+    {  
+        size_type result = 0;  
+        distance(begin(), end(), result);  
+        return result;  
+    }  
+
+    size_type max_size() const { return size_type(-1); }  
+    reference front() { return *begin(); }  
+    reference back() { return *(--end()); }  
+
+    ////////////////////////////////////////////////////////////////////////////////  
+    // 在指定位置插入元素  
+    ////////////////////////////////////////////////////////////////////////////////  
+    //       insert(iterator position, const T&amp; x)  
+    //                       ↓  
+    //                 create_node(x)  
+    //                 p = get_node();--------&gt;list_node_allocator::allocate();  
+    //                 construct(&amp;p-&gt;data, x);  
+    //                       ↓  
+    //            tmp-&gt;next = position.node;  
+    //            tmp-&gt;prev = position.node-&gt;prev;  
+    //            (link_type(position.node-&gt;prev))-&gt;next = tmp;  
+    //            position.node-&gt;prev = tmp;  
+    ////////////////////////////////////////////////////////////////////////////////  
+    //首先配置一个节点，然后在尾端进行适当的指针操作，将新节点插入进去。
+    iterator insert(iterator position, const T&amp; x)  
+    {  
+        link_type tmp = create_node(x);   // 产生一个节点，值为x  
+        // 调整双向指针，使tmp插入进去  
+        tmp-&gt;next = position.node;  
+        tmp-&gt;prev = position.node-&gt;prev;  
+        (link_type(position.node-&gt;prev))-&gt;next = tmp;  
+        position.node-&gt;prev = tmp;  
+        return tmp;//插入后返回的依然是插入点，插入是指的插入在..之前。  
+    }  
+
+  // 指定位置插入n个值为x的元素, 详细解析见实现部分  
+  void insert(iterator pos, size_type n, const T&amp; x);  
+  void insert(iterator pos, int n, const T&amp; x)  
+  {  
+      insert(pos, (size_type)n, x);  
+  }  
+  void insert(iterator pos, long n, const T&amp; x)  
+  {  
+      insert(pos, (size_type)n, x);  
+  }  
+
+  // 在链表前端插入结点  
+  void push_front(const T&amp; x) { insert(begin(), x); }  
+  // 在链表最后插入结点  
+  void push_back(const T&amp; x) { insert(end(), x); }  
+
+  // 移除迭代器position所指节点  
+  iterator erase(iterator position)  
+  {  
+      link_type next_node = link_type(position.node-&gt;next);  
+      link_type prev_node = link_type(position.node-&gt;prev);  
+      prev_node-&gt;next = next_node;  
+      next_node-&gt;prev = prev_node;  
+      destroy_node(position.node);  
+      return iterator(next_node);  
+  }  
+
+  // 擦除一个区间的结点, 详细解析见实现部分  
+  iterator erase(iterator first, iterator last);  
+
+  void resize(size_type new_size, const T&amp; x);  
+  void resize(size_type new_size) { resize(new_size, T()); }  
+  void clear();  
+
+  // 删除链表第一个结点  
+  void pop_front() { erase(begin()); }  
+  // 删除链表最后一个结点  
+  void pop_back()  
+  {  
+      iterator tmp = end();  
+      erase(--tmp);  
+  }  
+
+  list(size_type n, const T&amp; value) { fill_initialize(n, value); }  
+  list(int n, const T&amp; value) { fill_initialize(n, value); }  
+  list(long n, const T&amp; value) { fill_initialize(n, value); }  
+
+  ~list()  
+  {  
+    // 释放所有结点  // 使用全局函数distance()进行计算, 时间复杂度O(n)  
+  size_type size() const  
+  {  
+    size_type result = 0;  
+    distance(begin(), end(), result);  
+    return result;  
+  }  
+  clear();  
+  // 释放头结点  
+  put_node(node);  
+  }  
+
+  list&lt;T, Alloc&gt;&amp; operator=(const list&lt;T, Alloc&gt;&amp; x);  
+
+protected:  
+
+    ////////////////////////////////////////////////////////////////////////////////  
+    // 将[first, last)内的所有元素移动到position之前  
+    // 如果last == position, 则相当于链表不变化, 不进行操作  
+    ////////////////////////////////////////////////////////////////////////////////  
+    // 初始状态  
+    //                   first                             last  
+    //                     ↓                                 ↓  
+    //      --------   --------   --------     --------   --------   --------  
+    //      | next |--&gt;| next |--&gt;| next |     | next |--&gt;| next |--&gt;| next |  
+    //  ... --------   --------   -------- ... --------   --------   -------- ...  
+    //      | prev |&lt;--| prev |&lt;--| prev |     | prev |&lt;--| prev |&lt;--| prev |  
+    //      --------   --------   --------     --------   --------   --------  
+    //  
+    //                           position  
+    //                               ↓  
+    //      --------   --------   --------   --------   --------   --------  
+    //      | next |--&gt;| next |--&gt;| next |--&gt;| next |--&gt;| next |--&gt;| next |  
+    //  ... --------   --------   --------   --------   --------   -------- ...  
+    //      | prev |&lt;--| prev |&lt;--| prev |&lt;--| prev |&lt;--| prev |&lt;--| prev |  
+    //      --------   --------   --------   --------   --------   --------  
+    //  
+    // 操作完成后状态  
+    //                           first  
+    //                             |  
+    //               --------------|--------------------------------------  
+    //               | ------------|------------------------------------ |   last  
+    //               | |           ↓                                   | |     ↓  
+    //      -------- | |        --------   --------     --------       | |  --------   --------  
+    //      | next |-- |  -----&gt;| next |--&gt;| next |     | next |-----  | --&gt;| next |--&gt;| next |  
+    //  ... --------   |  |     --------   -------- ... --------    |  |    --------   -------- ...  
+    //      | prev |&lt;---  |  ---| prev |&lt;--| prev |     | prev |&lt;-- |  -----| prev |&lt;--| prev |  
+    //      --------      |  |  --------   --------     --------  | |       --------   --------  
+    //                    |  |                                    | |  
+    //                    |  ------                               | |  
+    //                    ------- |  ------------------------------ |  
+    //                          | |  |                              |  
+    //                          | |  |  -----------------------------  
+    //                          | |  |  |  
+    //                          | |  |  |  position  
+    //                          | |  |  |     ↓  
+    //      --------   -------- | |  |  |  --------   --------   --------   --------  
+    //      | next |--&gt;| next |-- |  |  --&gt;| next |--&gt;| next |--&gt;| next |--&gt;| next |  
+    //  ... --------   --------   |  |     --------   --------   --------   -------- ...  
+    //      | prev |&lt;--| prev |&lt;---  ------| prev |&lt;--| prev |&lt;--| prev |&lt;--| prev |  
+    //      --------   --------            --------   --------   --------   --------  
+    ////////////////////////////////////////////////////////////////////////////////  
+    void transfer(iterator position, iterator first, iterator last)  
+    {  
+        if (position != last)   // 如果last == position, 则相当于链表不变化, 不进行操作  
+        {  
+            (*(link_type((*last.node).prev))).next = position.node;  
+            (*(link_type((*first.node).prev))).next = last.node;  
+            (*(link_type((*position.node).prev))).next = first.node;  
+            link_type tmp = link_type((*position.node).prev);  
+            (*position.node).prev = (*last.node).prev;  
+            (*last.node).prev = (*first.node).prev;  
+            (*first.node).prev = tmp;  
+        }  
+    }  
+//list内部提供一个迁移操作，这个操作将连续范围内的元素迁移到某个特定位置之前，这个操作为后续的splice、sort、merge提供了基础
+void transfer(iterator position,iterator first,iterator last)
+{
+    if(position!=last)
+    {
+        (*(link_type((*last.node).prev))).next=position.node;//(1)
+        (*(link_type((*first.node).prev))).next=last.node;//(2)
+        (*(link_type((*position.node).prev))).next=first.node;//(3)
+        link_type tmp=link_type((*position.node).prev);（4）
+        (*position.node).prev=(*last.node).prev;//(5)
+        (*last.node).prev=(*first.node).prev;//(6)
+        (*first.node).prev=tmp;//(7)
+    }
+} 
+public:  
+    // 将链表x移动到position所指位置之前，x必须不同与*this  
+    void splice(iterator position, list&amp; x)  
+    {  
+        if (!x.empty())  
+            transfer(position, x.begin(), x.end());  
+    }  
+
+    // 将链表中i指向的内容移动到position之前，两者可以在同一个list中。  
+    void splice(iterator position, list&amp;, iterator i)  
+    {  
+        iterator j = i;  
+        ++j;  
+        if (position == i || position == j) return;  
+        transfer(position, i, j);//移动的时候不会包括j  
+    }  
+
+    // 将[first, last}元素移动到position之前，依然可以指向同一个list  
+    void splice(iterator position, list&amp;, iterator first, iterator last)  
+    {  
+        if (first != last)  
+            transfer(position, first, last);  
+    }  
+
+    void remove(const T&amp; value);  
+    void unique();  
+    void merge(list&amp; x);  
+    void reverse();  
+    void sort();  
+
+};  
+// 销毁所有结点, 将链表置空  
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::clear()  
+{  
+  link_type cur = (link_type) node-&gt;next;  
+  while (cur != node)  
+  {  
+    link_type tmp = cur;  
+    cur = (link_type) cur-&gt;next;  
+    destroy_node(tmp);  //挨个删除
+  }  
+  // 恢复node原始状态，恢复成一个空链表的样子。  
+  node-&gt;next = node;  
+  node-&gt;prev = node;  
+} 
+//将数值为value的所有元素移除
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::remove(const T&amp; value)  
+{  
+    iteration first=begin();
+    iteration last=end();
+    while(first!=last)
+    {
+        iterator next=first;
+        ++next;
+        if(*first==value)earse(first);
+        first=next;
+    }  
+} 
+// 移除容器内所有的相邻的重复结点,只有连续且相同，才会被移除到只剩下一个。  
+// 时间复杂度O(n)  
+// 用户自定义数据类型需要提供operator ==()重载  
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::unique()  
+{  
+  iterator first = begin();  
+  iterator last = end();  
+  if (first == last) return;  
+  iterator next = first;  
+  while (++next != last)  
+  {  
+    if (*first == *next)  
+      erase(next);  
+    else  
+      first = next;  
+    next = first;  
+  }  
+} 
+// 假设当前容器和x都已序, 保证两容器合并后仍然有序，将x合并到*this上，  
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::merge(list&lt;T, Alloc&gt;&amp; x)  
+{  
+  iterator first1 = begin();  
+  iterator last1 = end();  
+  iterator first2 = x.begin();  
+  iterator last2 = x.end();  
+
+  // 注意：前提是，两个lists都已经递增排序  
+  while (first1 != last1 &amp;&amp; first2 != last2)  
+    if (*first2 &lt; *first1)  
+    {  
+      iterator next = first2;  
+      transfer(first1, first2, ++next);  
+      first2 = next;  
+    }  
+    else  
+      ++first1;  
+  if (first2 != last2)  
+      transfer(last1, first2, last2);//最后结果也可以看出是归在list1里面的。  
+}  
+//将*this中的内容逆向重置
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::reverse()  
+{  
+     //空链表或者仅有一个元素，不进行任何操作。可以使用size()==0||size()==1来判断，但是比较慢。
+    if(node-&gt;next=node||link_type(node-&gt;next)-&gt;next==node)
+        return ;
+    iterator first=begin();
+    ++first;
+    while(first!=end())
+    {
+        iterator old=first;
+        ++first；
+        transfer(begin(),old,first);
+    }
+} 
+//list是不能使用stl提供的sort算法的，必须使用自己定义的sort函数，因为stl的sort只接受randonaccessiterator，下面这个函数采用的是归并排序的思想。
+template &lt;class T, class Alloc&gt;  
+void list&lt;T, Alloc&gt;::sort()
+{
+//空链表或者仅有一个元素，不进行任何操作。可以使用size()==0||size()==1来判断，但是比较慢。
+    if(node-&gt;next=node||link_type(node-&gt;next)-&gt;next==node)
+        return ;
+    //申请新的list用于做中介数据存放区；
+    list&lt;T,Alloc&gt;carry;//仅仅作为一个中转的链表
+    list&lt;T,Alloc&gt;counter[64];//链表数组，counter[i]会存储2^i个元素，并且是有序的。
+    int fill=0;
+    while(!empty())
+    {
+        carry.splice(carry.begin(),*this,begin());//取出首元素放在carry中。
+        int i=0;
+        while(i&lt;fill&amp;&amp;!counter[i].empty())
+        {
+            counter[i].merge(carry);//将carry中的元素归并到counter[i]中去。
+            carry.swap(counter[i++]);//交换carry与counter的值，这是为了可以接着归并。
+        }
+        carry.swap(counter[i]);//上述没有继续下去之后，再把carry中的元素交换到counter[i]中。
+        if(i==fill)++fill;//此时如果i==fill，说明下一次需要用到i++的归并空间了，所以fill++。
+    }
+    for(int i=1;i&lt;fill;++i)
+        counter[i].merge(counter[i-1]);//将所有未归并的元素归并起来，并且结果放在最后一个链表中。
+    swap(counter[fill-1]);//取出最后一个，重新交换会list中。
+}  
+//详细讲解过程可以看 https://blog.csdn.net/chenhanzhun/article/details/39337331
+</code></pre><p>下面是一些上面可能提到的结构的图片：<br><img src="/2019/07/17/stl源码剖析序列式容器/8.png" alt=""><br><img src="/2019/07/17/stl源码剖析序列式容器/9.png" alt=""><br><img src="/2019/07/17/stl源码剖析序列式容器/10.png" alt=""><br>3、deque<br>deque叫做双向队列，是一种双向开口的连续线性空间（伪连续），但是它的头部操作效率奇差无比，难以被接受，并且deque和vector的差异在于deque允许参数时间内对头端进行元素的插入和删除操作，deque没有容量的概念，动态的以分段连续空间组合而成，随时可以增加一段新的空间并且链接起来。deque也提供了random access iterator，但它的迭代器也不是普通指针，复杂度远在vector之上，因此，如果对deque实现排序，可以先将deque复制到一个vector中，将vector排序完成后，复制回deque中。deque采用一小块map（不是stl的map容器）作为主控，这个map是一小块连续空间，其中每个元素都是一个指针，指向另一端较大的连续线性空间，叫做缓冲区，缓冲区才是存储空间主体，默认值0代表使用512bytes缓冲区，map使用率如果满载，利用reallocate_map（）配置一块更大的空间作为map。</p>
+<pre><code>template&lt;class T,class Alloc=alloc,size_t BufSiz=0&gt;
+class deque{
+            public:
+                typedef T value_type;
+                typedef value_type* pointer;
+                .....
+            proteced:
+                typedef pointer* map_pointer;//元素的指针的指针
+                map_pointer map;//指向map
+                size_type map_size;//map内可容纳多少指针。
+}
+</code></pre><p>deque是一个分段连续空间，维持其“整体连续”假象的任务，就落在了迭代器的operator++和operator–两个运算子身上。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/12/剑指offer重建二叉树/" rel="next" title="重建二叉树">
+                <i class="fa fa-chevron-left"></i> 重建二叉树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/18/数据结构cpp代码/" rel="prev" title="数据结构c++实现">
+                数据结构c++实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="小霸王孙无月">
+            
+              <p class="site-author-name" itemprop="name">小霸王孙无月</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ayesawyer.github.io/" title="隔壁xxx的小屋" target="_blank">隔壁xxx的小屋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小霸王孙无月</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客数
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-unitychan"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
