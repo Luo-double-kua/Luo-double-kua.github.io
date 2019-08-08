@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="谢希仁老师的计算机网络学习（第六版）">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络学习之基础概念">
+<meta property="og:url" content="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/index.html">
+<meta property="og:site_name" content="秉忠贞之诚,守退让之实">
+<meta property="og:description" content="谢希仁老师的计算机网络学习（第六版）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/3.png">
+<meta property="og:updated_time" content="2019-08-06T07:23:26.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络学习之基础概念">
+<meta name="twitter:description" content="谢希仁老师的计算机网络学习（第六版）">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/">
+
+
+
+
+
+  <title>计算机网络学习之基础概念 | 秉忠贞之诚,守退让之实</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秉忠贞之诚,守退让之实</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/计算机网络学习之基础概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小霸王孙无月">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秉忠贞之诚,守退让之实">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络学习之基础概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T10:44:30+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络学习/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>阅读次数
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>谢希仁老师的计算机网络学习（第六版）<br><a id="more"></a><br>因特网就是世界上最大的国际性计算机网络，计算机网络一般是指一些互相连接的、自治（独立）的计算机的集合。<br>计算机网络向用户提供的最重要的两个功能是：<br>（1）连通性：指计算机网络上的上网用户之间都可以交换信息，好像这些用户的计算机都可以彼此连通一样。<br>（2）共享：是指的资源共享，资源共享的含义是多方面的，可以是信息共享、软件共享、硬件共享等。例如，计算机网络上有许多主机存储了大量有价值的电子文档，可以上网的用户自由读取或下载，由于网络的存在，这些资源就好像在用户身边一样。<br>网络是由若干结点和连接这些结点的链路所组成的，结点可以使计算机、集线器、交换机、路由器等。网络和网络之间可以通过路由器连接起来，构成一个覆盖更大的网络，就是互联网，因此互联网是“网络的网络”，所以网络把许多计算机链接起来，而因特网把网络连接起来。<br>ISP：因特网服务提供者，移动，联通，电信。用户一般通过ISP连入因特网。ISP也分为主干isp、地区isp、本地isp。<br>IXP：因特网交换点，用于更快的转发分组，一图胜千言，哈哈哈，如下图所示：<br><img src="/2019/08/06/计算机网络学习之基础概念/1.png" alt=""><br>它的作用就是允许两个网络直接相连并交换分组，不需要再通过第三个网络来转发分组。<br>因特网按照其工作方式可以分为一下两大块：<br>（1）边缘部分：由所有连接在因特网上的主机（host，又称端系统end system）组成，这部分是用户直接使用，用来进行通信和资源共享。<br>（2）核心部分：有大量网络和连接这些网络的路由器组成，这部分是为边缘部分提供连通性和交换的。<br>首先明确一个概念，主机A和主机B进行通信，实际是指主机A上的某个进程和主机B上的另一个进程进行通信，这才可以简称为计算机之间的通信。<br>端系统之间的通信方式通常划分为两大类：<br>（1）客户-服务器方式（C/S方式）（分为客户和服务器，两者是指计算机进程，或者说计算机软件）<br>（2）对等方式（P2P方式）（本质上仍是上一种模式，但是对等连接中每一个主机即是客户又是服务器）<br>网络核心部分的功能是提供连通性，使边缘部分每一台主机都能像其它主机通信。其中起到特殊作用的是路由器，它是一种专用计算机（不是主机），实现分组交换。<br>短分组是暂存在路由器的存储器（内存）中而不是存在磁盘中的，保证了较高的交换速率。<br>分组交换的优点：（1）高效，动态分配传输带宽，对通信链路是逐段占用。(2)灵活，为每一个分组独立的选择转发路由（3）迅速，以分组作为传送单位，可以不先建立连接就能像其它主机发送分组（4）可靠，保证可靠性的网络协议，分布式多路由的分组交换网，网络有良好的生存性。<br>缺点：（1）存在时延，因为是存储转发（2）携带控制信息照成额外开销。<br>三种交换的区别：<br>（1）电路交换，整个报文连续的从源点到达终点，好像在一个管道中出传送<br>（2）报文交换，整个报文先到相邻节点，全部存储下来再转发，转发到下一个节点<br>（3）分组交换，当个分组（报文的一部分）到相邻节点，存储下来再转发，转发到下一个节点<br><img src="/2019/08/06/计算机网络学习之基础概念/2.png" alt=""><br>按网络的作用范围分类：<br>（1）WAN广域网<br>（2）MAN城域网<br>（3）LAN局域网<br>（4）PAN个人区域网<br>计算机网络的性能指标<br>（1）速率<br>b/s，bit每秒<br>（2）带宽<br>  带宽本来是指某个信号具有的频带宽度，但是在计算机网络中，带宽是指网络的通信线路的传输数据的能力，因此表示的是代为时间内从网络的某一点到另一点所能通过的“最高数据率”。<br>（3）吞吐量<br>单位时间内通过某个网络的数据量。<br>（4）时延<br>  4.1发送时延是主机或路由器发送数据帧所需要的时间，也叫传输时延。<br>  4.2传播时延是电磁波在信道中传播一定距离需要话费的时间。<br>  4.3处理时延，主机或路由器收到分组进行处理花费的时间。<br>  4.4排队时延，分组在经过路由器时，在路由器内部等待处理话费时间。<br>（5）时延带宽积<br>时延*带宽，<br>（6）往返时间RTT<br>（7）利用率<br>ISO在1977年提出了OSI/RM(开放系统互连基本参考模型)，但是TCP/IP才是事实上的国际标准。<br>分层带来了很多好处：<br>（1）各层之间独立的，降低复杂度<br>（2）灵活性好<br>（3）结构上可分割开<br>（4）易于实现和维护<br>（5）能促进标准化工作<br>介绍一下五个层：<br>（1）应用层<br>它是体系结构的最高层，任务是通过应用进程间得交互来完成特定的网络应用，应用层协议定义的是应用进程间通信和交互的规则，这里的进程就是指正在运行的程序，不同的网络应用需要不同的应用层协议，比如万维网的HTTP协议，电子邮件的SMTP协议，文件传输的FTP协议。应用层的交互数据单元称为报文。<br>（2）运输层<br>负责向两个主机中进程之间的通信提供通用的数据传输服务。应用进程利用该服务传送应用层报文。运输层主要使用的是以下两种协议：<br>2.1TCP传输控制协议（transmission control protocol）提供面向连接的、可靠的数据传输服务，其传输的单位是报文段（SEGMENT）。<br>2.2UDP用户数据报协议（user datagram protocol）提供无连接的、尽最大努力的数据传输服务（不保证数据传输的可靠性），其数据传输的单位是用户数据报。<br>（3）网络层<br>负责为分组交换网上的不同主机提供通信服务，发送数据时，把运输层产生的报文段或用户数据报封装成分组或包进行传送，因为TCP/IP体系，由于网络层使用ip协议，因此分组也叫做IP数据报，或简称为数据报。<br>（4）数据链路层<br>两个相邻结点传送数据时，链路层将网络层交下来的IP数据报组装成帧，在相邻结点之间传送帧，每一帧包括数据和必要的控制信息（同步信息、地址信息、差错控制等）。<br>（5）物理层<br>物理层上所传数据的单位是比特（bit），发送0、1。<br>简化的传输流程如下所示：<br><img src="/2019/08/06/计算机网络学习之基础概念/3.png" alt=""><br>路由器的三层是：物理层、链路层、网络层。<br>运输层最重要的协议是传输控制协议TCP和用户数据报协议UDP，网络层最重要的协议是网际协议IP。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/leetcode_3_无重复字符的最长子串/" rel="next" title="leetcode 3. 无重复字符的最长子串">
+                <i class="fa fa-chevron-left"></i> leetcode 3. 无重复字符的最长子串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/06/计算机网络学习之数据链路层/" rel="prev" title="计算机网络学习之数据链路层与网络层">
+                计算机网络学习之数据链路层与网络层 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="小霸王孙无月">
+            
+              <p class="site-author-name" itemprop="name">小霸王孙无月</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ayesawyer.github.io/" title="隔壁xxx的小屋" target="_blank">隔壁xxx的小屋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小霸王孙无月</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      访客数
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-unitychan"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
