@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
+<meta name="description" content="利用归并排序。">
 <meta name="keywords" content="c++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 34 在排序数组中查找元素的第一个和最后一个位置">
-<meta property="og:url" content="http://yoursite.com/2019/06/26/leetcode 34/index.html">
+<meta property="og:title" content="leetcode 23 合并K个排序链表">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/leetcode 23  合并K个排序链表/index.html">
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
-<meta property="og:description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
+<meta property="og:description" content="利用归并排序。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-26T11:20:20.704Z">
+<meta property="og:updated_time" content="2019-10-30T03:11:35.414Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode 34 在排序数组中查找元素的第一个和最后一个位置">
-<meta name="twitter:description" content="看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。">
+<meta name="twitter:title" content="leetcode 23 合并K个排序链表">
+<meta name="twitter:description" content="利用归并排序。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/26/leetcode 34/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/30/leetcode 23  合并K个排序链表/">
 
 
 
 
 
-  <title>leetcode 34 在排序数组中查找元素的第一个和最后一个位置 | 秉忠贞之诚,守退让之实</title>
+  <title>leetcode 23 合并K个排序链表 | 秉忠贞之诚,守退让之实</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/leetcode 34/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/30/leetcode 23  合并K个排序链表/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="小霸王孙无月">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode 34 在排序数组中查找元素的第一个和最后一个位置</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode 23 合并K个排序链表</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T19:16:05+08:00">
-                2019-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T10:47:08+08:00">
+                2019-10-30
               </time>
             
 
@@ -357,78 +357,70 @@
       
 
       
-        <p>看到复杂度要求是O（log n），第一感觉就是试试二分法，并且题目也说了是有序数组。</p>
-<a id="more"></a>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。<br>你的算法时间复杂度必须是 O(log n) 级别。<br>如果数组中不存在目标值，返回 [-1, -1]。<br>示例 1:<br>输入: nums = [5,7,7,8,8,10], target = 8<br>输出: [3,4]<br>示例 2:<br>输入: nums = [5,7,7,8,8,10], target = 6<br>输出: [-1,-1]</p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>就是按照二分法的方法首先找到目标元素，然后在进行前后拓展，情况最差的时候会退化成log（n）。</p>
-<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code>class Solution {
+        <p>利用归并排序。<br><a id="more"></a></p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。</p>
+<p>示例:</p>
+<p>输入:<br>[<br>  1-&gt;4-&gt;5,<br>  1-&gt;3-&gt;4,<br>  2-&gt;6<br>]<br>输出: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>因为这些数组都是排好序的，这就是很明显可以利用归并排序了，只写了一个简单的二路归并，示例如下：<br>｛<br>｛1，2，3，4｝，<br>｛2，2，6，7｝，<br>｛4，5，12，67｝，<br>｛1，2，2，3｝<br>｝<br>首先将第一条链表p1和第二条链表p2进行归并，为了方便归并，所以先申请一个新的临时节点res,<br>1，2，3，4与2，2，6，7进行比较，首先选出p1、p2中最小的节点1，将其放在res后面，然后p1往后移动，res往后移动，然后再选p1、p2中的最小节点，最后结果是res-&gt;1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;6-&gt;7,再将res-&gt;next赋给lists[0]，这样其实已经将两条链表连在一起了，最后记得删除res，防止内存泄漏，然后再将第一条链表和第三条链表进行归并，同理最后得到结果是：<br>res-&gt;1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6-&gt;7-&gt;12-&gt;67,再将res-&gt;next赋给lists[0]，这样将第三条链表加在第一条链表中，三条链表连在了一起，同样最后记得删除res。<br>再将第四条链表加入其中，同理得到结果：<br>res-&gt;1-&gt;1-&gt;2-&gt;2-&gt;2-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6-&gt;7-&gt;12-&gt;67<br>严格来说不算归并，只是每次将一条链表（从第二条开始）有序加入已经排序好的第一条链表中，最后其实就是所有链表的排序结果，用上归并排序的两两归并，速度应该会更快，相当与log(n)和n的区别嘛。</p>
+<h3 id="code"><a href="#code" class="headerlink" title="code"></a>code</h3><pre><code> /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
 public:
-vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
-    int left=0;
-    int right=nums.size()-1;
-    int index=-1;
-    while(left&lt;=right)
+    void guibing(ListNode* &amp;p1,ListNode* &amp;p2,vector&lt;ListNode*&gt;&amp; lists)
     {
-        int mid=left+((right-left)&gt;&gt;1);
-        if(nums[mid]==target)
+         ListNode* res=new ListNode(0);
+        ListNode* temp=res;
+        while(p1&amp;&amp;p2)
         {
-            index=mid;
-            break;
+            if(p1-&gt;val&lt;p2-&gt;val)
+            {
+                temp-&gt;next=p1;
+                temp=temp-&gt;next;
+                p1=p1-&gt;next;
+            }
+            else
+            {
+                temp-&gt;next=p2;
+                temp=temp-&gt;next;
+                p2=p2-&gt;next;
+            }
         }
-        else if(nums[mid]&lt;target)
+        while(p1)
         {
-            left=left+1;
+                temp-&gt;next=p1;
+                temp=temp-&gt;next;
+                p1=p1-&gt;next;
         }
-        else
-            right-=1;
+        while(p2)
+        {
+                temp-&gt;next=p2;
+                temp=temp-&gt;next;
+                p2=p2-&gt;next;
+        }
+        lists[0]=res-&gt;next;
+        delete res;
+        return ;
     }
+    ListNode* mergeKLists(vector&lt;ListNode*&gt;&amp; lists) {
+        if(lists.size()==0)
+            return NULL;
+        for(int i=1;i&lt;lists.size();++i)
+        {
+            ListNode* p2=lists[i];
+            ListNode* p1=lists[0];
 
-    if(index==-1)
-        return {-1,-1};
-    vector&lt;int&gt;res;
-    left=index;
-    right=index;
-    while(0&lt;=left&amp;&amp;nums[left]==target)
-    {
-        left--;
+            guibing(p2,p1,lists);
+
+        }
+        return lists[0];
     }
-    res.push_back(left+1);
-    while(right&lt;nums.size()&amp;&amp;nums[right]==target)
-    {
-        right++;
-    }
-    res.push_back(right-1);
-    return res;
-}
 };
-</code></pre><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>这个是复杂度为2logn的，所以满足要求，或者说我们可以将目标数值减去0.5，然后找出大于它的最小的数值。</p>
-<h3 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h3><pre><code>     vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
-    //明显的二分查找,注意不能找到左边缘再循环遍历到右边缘，因为可能整个数组都是这个数，这样复杂度就是变成n+logn了
-    //所以我这里可以分别找左右边缘
-    if(nums.empty()) return {-1,-1};
-    if(target&lt;nums.front()||target&gt;nums.back()) return {-1,-1};//左右边缘会异常，所以单独处理
-    int i=0,j=nums.size()-1,mid;
-    while(i&lt;=j){//找到左边
-        mid=(j-i)/2+i;
-        if(nums[mid]&gt;=target){
-            j=mid-1;
-        }else{
-            i=mid+1;
-        }
-    }
-    if(nums[i]!=target) return {-1,-1};
-    int begin=i;
-    j=nums.size()-1;
-    while(i&lt;=j){//从左边缘到最后开始继续二分找到右边缘
-        mid=(j-i)/2+i;
-        if(nums[mid]&gt;target){
-            j=mid-1;
-        }else{
-            i=mid+1;
-        }
-    }
-    return {begin,j};
-}
 </code></pre>
       
     </div>
@@ -459,8 +451,8 @@ vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/24/6月c++学习/" rel="next" title="6月c++学习">
-                <i class="fa fa-chevron-left"></i> 6月c++学习
+              <a href="/2019/10/29/leetcode 19 删除链表的倒数第N个节点/" rel="next" title="leetcode 19 删除链表的倒数第N个节点">
+                <i class="fa fa-chevron-left"></i> leetcode 19 删除链表的倒数第N个节点
               </a>
             
           </div>
@@ -469,8 +461,8 @@ vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/03/7月数据结构学习（栈和队列）/" rel="prev" title="7月数据结构学习（栈和队列）">
-                7月数据结构学习（栈和队列） <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/31/leetcode 24  两两交换链表中的节点/" rel="prev" title="leetcode 24 两两交换链表中的节点">
+                leetcode 24 两两交换链表中的节点 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,7 +542,7 @@ vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -619,7 +611,7 @@ vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code-1"><span class="nav-number">5.</span> <span class="nav-text">code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">code</span></a></li></ol></div>
             
 
           </div>
