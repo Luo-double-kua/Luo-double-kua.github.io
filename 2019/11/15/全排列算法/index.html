@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="秉忠贞之诚,守退让之实">
 <meta property="og:description" content="全排列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-15T09:40:09.092Z">
+<meta property="og:updated_time" content="2019-11-16T02:15:16.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全排列算法">
 <meta name="twitter:description" content="全排列">
@@ -366,11 +366,63 @@
 <pre><code>    abc
 abc bac cba
 </code></pre><p>acb abc bca bac cab cba</p>
-<p>#code<br>     void digui(string str,int begin,int l,vector<string> &amp;res)<br>            {<br>                if(begin==l)<br>                    res.push_back(str);<br>                else<br>                {<br>                    for(int i=begin;i&lt;=l;i++)<br>                    {<br>                        swap(str[begin],str[i]);<br>                        digui(str,begin+1,l,res);<br>                        swap(str[begin],str[i]);<br>                    }<br>                }<br>                return ;<br>            }<br>            vector<string> Permutation(string str) {<br>                vector<string> res;<br>                if(str.size()==0)<br>                    return res;<br>                int l=str.size()-1;<br>                digui(str,0,l,res);<br>                return res;<br>            }<br>        };</string></string></string></p>
-<p><strong>二、数组中有重复元素</strong></p>
+<p>#code</p>
+<pre><code>void digui(string str,int begin,int l,vector&lt;string&gt; &amp;res)
+       {
+           if(begin==l)
+               res.push_back(str);
+           else
+           {
+               for(int i=begin;i&lt;=l;i++)
+               {
+                   swap(str[begin],str[i]);
+                   digui(str,begin+1,l,res);
+                   swap(str[begin],str[i]);
+               }
+           }
+           return ;
+       }
+       vector&lt;string&gt; Permutation(string str) {
+           vector&lt;string&gt; res;
+           if(str.size()==0)
+               return res;
+           int l=str.size()-1;
+           digui(str,0,l,res);
+           return res;        
+       }
+   };
+</code></pre><p><strong>二、数组中有重复元素</strong></p>
 <p>当数组中存在重复的元素，那么就不能再和之前一样的，因为假设a1=a4，那么当a1和a4进行交换之后，字符串并没有任何变化，所以加上一行判断是否相等的代码就可以了。</p>
-<p>#code<br>     class Solution {<br>    public:<br>        void digui(string str,int begin,int l,vector<string> &amp;res)<br>        {<br>            if(begin==l)<br>                res.push_back(str);<br>            else<br>            {<br>                for(int i=begin;i&lt;=l;i++)<br>                {<br>                    if(begin!=i&amp;&amp;str[begin]==str[i])//防止有相同的字符，就不用进行交换了，前面个判断条件是因为自身也需要交换一次，如果不加，就会一起跳过，就本来的排列都不会被添加进结果。。<br>                        continue;<br>                    swap(str[begin],str[i]);<br>                    digui(str,begin+1,l,res);<br>                    swap(str[begin],str[i]);<br>                }<br>            }<br>            return ;<br>        }<br>        vector<string> Permutation(string str) {<br>            vector<string> res;<br>            if(str.size()==0)<br>                return res;<br>            int l=str.size()-1;<br>            digui(str,0,l,res);<br>            return res;<br>        }<br>    };</string></string></string></p>
-
+<p>#code</p>
+<pre><code> class Solution {
+public:
+    void digui(string str,int begin,int l,vector&lt;string&gt; &amp;res)
+    {
+        if(begin==l)
+            res.push_back(str);
+        else
+        {
+            for(int i=begin;i&lt;=l;i++)
+            {
+                if(begin!=i&amp;&amp;str[begin]==str[i])//防止有相同的字符，就不用进行交换了，前面个判断条件是因为自身也需要交换一次，如果不加，就会一起跳过，就本来的排列都不会被添加进结果。。
+                    continue;
+                swap(str[begin],str[i]);
+                digui(str,begin+1,l,res);
+                swap(str[begin],str[i]);
+            }
+        }
+        return ;
+    }
+    vector&lt;string&gt; Permutation(string str) {
+        vector&lt;string&gt; res;
+        if(str.size()==0)
+            return res;
+        int l=str.size()-1;
+        digui(str,0,l,res);
+        return res;        
+    }
+};
+</code></pre>
       
     </div>
     
@@ -409,6 +461,10 @@ abc bac cba
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/16/动态规划算法解析/" rel="prev" title="动态规划算法">
+                动态规划算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -478,7 +534,7 @@ abc bac cba
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">124</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
